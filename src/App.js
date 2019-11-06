@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import reset from "styled-reset";
+
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import HistoricalData from "./pages/HistoricalData";
+import Home from "./pages/Home";
+import Users from "./pages/Users";
+
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+ ${reset}
+`;
+
+const Container = styled.div`
+  font-family: "Montserrat", sans-serif;
+  font-size: 100%;
+  flex-wrap: wrap;
+  height: 100vh;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <GlobalStyle />
+      <Router>
+        <Header />
+        <div>
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/historical-data" component={HistoricalData} />
+            <Route path="/users" component={Users} />
+          </Switch>
+        </div>
+        <Footer />
+      </Router>
+    </Container>
   );
 }
 
