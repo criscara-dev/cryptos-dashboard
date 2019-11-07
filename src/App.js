@@ -19,7 +19,9 @@ const Container = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 100%;
   flex-wrap: wrap;
-  height: 100vh;
+  min-height: 100vh;
+  display: grid;
+  grid-gap: 1em;
 `;
 
 function App() {
