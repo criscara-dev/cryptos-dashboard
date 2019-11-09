@@ -9,6 +9,7 @@ import HistoricalData from "./pages/HistoricalData";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import GainTracker from "./pages/GainTracker";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -37,6 +38,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/historical-data" component={HistoricalData} />
+            <Route path="/gain-tracker" component={GainTracker} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Switch>
