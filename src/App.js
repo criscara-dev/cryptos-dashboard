@@ -24,6 +24,8 @@ const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-gap: 1em;
+  // background-color: #191734;
+  // color: #fff;
 `;
 
 function App() {
