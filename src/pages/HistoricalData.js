@@ -1,5 +1,6 @@
 import React from "react";
 
-export default function HistoricalData() {
-  return <div>show some Chart here...</div>;
-}
+export default props => {
+  console.log(props);
+  return <div style={{ padding: 20 }}>{props.match.params.coin}</div>;
+};

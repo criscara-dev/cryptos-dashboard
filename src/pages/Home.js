@@ -54,6 +54,12 @@ export default class Home extends Component {
     this.getLatestNews();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectValue !== this.state.selectValue) {
+      this.getTopList24h();
+    }
+  }
+
   onHandleSelect = data => {
     this.setState({ selectValue: data.value });
   };

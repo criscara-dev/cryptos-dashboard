@@ -39,7 +39,7 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/historical-data" component={HistoricalData} />
+            <Route path="/historical-data/:coin" component={HistoricalData} />
             <Route path="/gain-tracker" component={GainTracker} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

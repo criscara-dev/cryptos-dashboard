@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -7,70 +8,69 @@ export default class Toplist24h extends Component {
     const data24 = this.props.toplist24;
     // console.log(data24.length);
 
-    const currency = this.props.currency;
-    console.log(currency);
-
     return (
       <React.Fragment>
         <CenterAlign>
           <h2>Current Market Evaluation:</h2>
           <TList24h>
-            {data24.map((data, currency) => (
-              <CoinData key={data.CoinInfo.Id}>
-                <span>{data.CoinInfo.Name}</span>
-                <span>
-                  <img
-                    src={`https://www.cryptocompare.com${data.CoinInfo.ImageUrl}`}
-                    alt={`${data.CoinInfo.FullName} logo`}
-                    width="50"
-                    height="auto"
-                  />
-                </span>
-                <span>
-                  <h3>Market:</h3>
-                  {data.DISPLAY.GBP.MARKET}
-                </span>
-                <span>
-                  <h3>Last Update:</h3>
-                  {data.DISPLAY.GBP.LASTUPDATE}
-                </span>
-                <span>
-                  <h3>Price:</h3>
-                  {data.DISPLAY.GBP.PRICE}
-                </span>
-                <span>
-                  <h3>Hign in 24h:</h3>
-                  {data.DISPLAY.GBP.HIGH24HOUR}
-                </span>
-                <span>
-                  <h3>Low in 24h:</h3>
-                  {data.DISPLAY.GBP.LOW24HOUR}
-                </span>
-                <span>
-                  <h3>High Day:</h3>
-                  {data.DISPLAY.GBP.HIGHDAY}
-                </span>
-                <span>
-                  <h3>Low Day:</h3>
-                  {data.DISPLAY.GBP.LOWDAY}
-                </span>
-                <span>
-                  <a
-                    rel="noopener noreferrer"
-                    href={`https://www.cryptocompare.com${data.CoinInfo.Url}`}
-                    target="_blank"
-                  >
-                    More info:
-                  </a>
-                </span>
-              </CoinData>
-            ))}
+            {data24.map(data => {
+              const currency = data.DISPLAY[this.props.currency];
+              if(!currency) return null;
+              return (
+                <CoinData key={data.CoinInfo.Id}>
+                  <span>{data.CoinInfo.Name}</span>
+                  <span>
+                    <img
+                      src={`https://www.cryptocompare.com${data.CoinInfo.ImageUrl}`}
+                      alt={`${data.CoinInfo.FullName} logo`}
+                      width="50"
+                      height="auto"
+                    />
+                  </span>
+                  <span>
+                    <h3>Market:</h3>
+                    {currency.MARKET}
+                  </span>
+                  <span>
+                    <h3>Last Update:</h3>
+                    {currency.LASTUPDATE}
+                  </span>
+                  <span>
+                    <h3>Price:</h3>
+                    {currency.PRICE}
+                  </span>
+                  <span>
+                    <h3>Hign in 24h:</h3>
+                    {currency.HIGH24HOUR}
+                  </span>
+                  <span>
+                    <h3>Low in 24h:</h3>
+                    {currency.LOW24HOUR}
+                  </span>
+                  <span>
+                    <h3>High Day:</h3>
+                    {currency.HIGHDAY}
+                  </span>
+                  <span>
+                    <h3>Low Day:</h3>
+                    {currency.LOWDAY}
+                  </span>
+                  <span>
+                    <Link to={`historical-data/${data.CoinInfo.Name}`}>
+                      Historical data about {data.CoinInfo.Name}
+                    </Link>
+                  </span>
+                </CoinData>
+              );
+            })}
           </TList24h>
         </CenterAlign>
       </React.Fragment>
     );
   }
 }
+
+const obj = {};
 
 const CenterAlign = styled.div`
   display: flex;
