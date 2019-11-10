@@ -1,0 +1,31 @@
+// hex colors:
+
+//reds:
+#e25050
+#fd5f60
+#2e2a4d
+
+// purples:
+#191734
+#1a1736
+#131127
+#232041
+#262344
+#928fff
+#516bf0
+
+// greens:
+#205d63
+#24baa0
+#00cc8a
+#00faa6
+#23eaa4
+
+// grays:
+#6e748e
+#47525d
+#929eaa
+#a6a9b6
+#999
+#eeeef1
+#d4d9dd
