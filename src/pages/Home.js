@@ -8,7 +8,6 @@ import cryptoCompare from "../api/cryptoCompare";
 // components
 import Welcome from "../components/Welcome";
 import Toplist24h from "../components/Toplist24h";
-import News from "../components/News";
 
 const options = [
   { value: "GBP", label: "GBP currency" },
@@ -27,8 +26,7 @@ const SelectContainer = styled.div`
 export default class Home extends Component {
   state = {
     selectValue: "GBP",
-    data24h: [],
-    news: []
+    data24h: []
   };
 
   getTopList24h = async () => {
@@ -40,18 +38,8 @@ export default class Home extends Component {
     });
   };
 
-  getLatestNews = async () => {
-    const link = `https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key=${process.env.REACT_APP_API_URL}`;
-    // const link = `/top/totalvolfull?limit=10&tsym=GBP&api_key=${process.env.REACT_APP_API_URL}`;
-    const response = await cryptoCompare.get(link);
-    this.setState({
-      news: response.data.Data
-    });
-  };
-
   componentDidMount() {
     this.getTopList24h();
-    this.getLatestNews();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -83,7 +71,6 @@ export default class Home extends Component {
           toplist24={this.state.data24h}
           currency={this.state.selectValue}
         />
-        <News news={this.state.news} />
       </div>
     );
   }

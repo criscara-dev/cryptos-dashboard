@@ -15,6 +15,9 @@ export default function Header() {
             <Link to="/historical-data">HistoricalData</Link>
           </Li>
           <Li>
+            <Link to="/news">News</Link>
+          </Li>
+          <Li>
             <Link to="/gain-tracker">GainTracker</Link>
           </Li>
         </NavLeft>

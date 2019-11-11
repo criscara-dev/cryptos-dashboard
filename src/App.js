@@ -7,6 +7,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HistoricalData from "./pages/HistoricalData";
 import Home from "./pages/Home";
+import News from "./pages/News";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import GainTracker from "./pages/GainTracker";
@@ -41,6 +42,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/historical-data/:coin" component={HistoricalData} />
             <Route path="/gain-tracker" component={GainTracker} />
+            <Route path="/news" component={News} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Switch>
