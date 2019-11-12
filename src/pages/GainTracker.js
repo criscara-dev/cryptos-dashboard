@@ -4,6 +4,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import cryptoCompare from "../api/cryptoCompare";
 import moment from "moment";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate
+} from "react-day-picker/moment";
 
 import IntroGainTracker from "../components/IntroGainTracker";
 import CurrentPrices from "../components/CurrentPrices";
@@ -12,14 +18,13 @@ export default class GainTracker extends Component {
   state = {
     datePrices: [],
     pricesBTC: "",
-    date: ""
+    selectedDay: undefined
   };
 
   getPriceHistoricData = async () => {
     // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=1513285669&api_key=${process.env.REACT_APP_API_URL}`;
-    const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=${moment().unix()}&api_key=${
-      process.env.REACT_APP_API_URL
-    }`;
+    // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=${this.state.selectedDay}&api_key=${process.env.REACT_APP_API_URL}`;
+    const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&ts=${this.state.selectedDay}`;
     const response = await cryptoCompare.get(link);
     this.setState({
       datePrices: response.data.Data.Data
@@ -36,12 +41,17 @@ export default class GainTracker extends Component {
 
   componentDidMount() {
     this.getPriceHistoricData();
-    this.getDataPrices();
+    // this.getDataPrices();
   }
 
-  onChange = e => {
+  // danger
+  // componentDidUpdate() {
+  //   this.getDataPrices();
+  // }
+
+  handleDayChange = selectedDay => {
     this.setState({
-      date: e.target.value
+      selectedDay: selectedDay
     });
   };
 
@@ -50,10 +60,15 @@ export default class GainTracker extends Component {
   };
 
   render() {
+    // console.log(this.state.pricesBTC);
+
     console.log(this.state.datePrices);
     const date = this.state.datePrices;
 
-    // console.log(this.state.pricesBTC);
+    // @TODO
+    // this value need to be passed to the API request
+    const { selectedDay } = this.state;
+    console.log(moment(this.state.selectedDay).unix());
 
     return (
       <div>
@@ -61,12 +76,23 @@ export default class GainTracker extends Component {
         <CurrentPrices prices={this.state.pricesBTC} />
         <TransactionContainer>
           <h2>Enter Transaction</h2>
+
           <Form>
             <form action="" onFormSubmit={this.onSubmit}>
               <label htmlFor="">Amount</label>
               <input type="text" name="amount" placeholder="ex. £ 1,000.00" />
               <label htmlFor="">Date</label>
-              <input type="text" name="date" onChange={this.onChange} />
+              <DayPickerInput
+                formatDate={formatDate}
+                parseDate={parseDate}
+                placeholder={`${formatDate(new Date())}`}
+                value={selectedDay}
+                onDayChange={this.handleDayChange}
+                dayPickerProps={{
+                  selectedDays: selectedDay,
+                  localeUtils: MomentLocaleUtils
+                }}
+              />
               <button type="submit">Check Profits</button>
             </form>
           </Form>
@@ -84,6 +110,7 @@ export default class GainTracker extends Component {
                 parseFloat(`${data.low}`) / 2
               ).toFixed(2)}
             </span>
+            <h1 style={{ color: "red" }}>{data.open}</h1>
           </DayPurchase>
         ))}
         Your initial investment of 'xxx' is now <br />
