@@ -16,38 +16,42 @@ import CurrentPrices from "../components/CurrentPrices";
 
 export default class GainTracker extends Component {
   state = {
-    datePrices: [],
-    pricesBTC: "",
+    // pricesBTC: "",
+    todayBTC: {},
     selectedDay: undefined
   };
 
   getPriceHistoricData = async () => {
     // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=1513285669&api_key=${process.env.REACT_APP_API_URL}`;
-    // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=${this.state.selectedDay}&api_key=${process.env.REACT_APP_API_URL}`;
-    const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&ts=${this.state.selectedDay}`;
+    // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=${moment(
+    //   this.state.selectedDay
+    // ).unix()}&api_key=${process.env.REACT_APP_API_URL}`;
+    const link = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=GBP&ts=${moment(
+      this.state.selectedDay
+    ).unix()}`;
     const response = await cryptoCompare.get(link);
     this.setState({
-      datePrices: response.data.Data.Data
+      todayBTC: response.data.BTC
     });
   };
 
-  getDataPrices = async () => {
-    const link = `/pricemulti?fsyms=BTC,ETH,DFASH,LTC&tsyms=BTC,ETH,DASH,USD,EUR,GBP&api_key=${process.env.REACT_APP_API_URL}`;
-    const response = await cryptoCompare.get(link);
-    this.setState({
-      pricesBTC: response.data.BTC
-    });
-  };
+  // getDataPrices = async () => {
+  //   const link = `/pricemulti?fsyms=BTC,ETH,DFASH,LTC&tsyms=BTC,ETH,DASH,USD,EUR,GBP&api_key=${process.env.REACT_APP_API_URL}`;
+  //   const response = await cryptoCompare.get(link);
+  //   this.setState({
+  //     pricesBTC: response.data.BTC
+  //   });
+  // };
 
   componentDidMount() {
-    this.getPriceHistoricData();
     // this.getDataPrices();
   }
 
-  // danger
-  // componentDidUpdate() {
-  //   this.getDataPrices();
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedDay !== this.state.selectedDay) {
+      this.getPriceHistoricData();
+    }
+  }
 
   handleDayChange = selectedDay => {
     this.setState({
@@ -62,18 +66,16 @@ export default class GainTracker extends Component {
   render() {
     // console.log(this.state.pricesBTC);
 
-    console.log(this.state.datePrices);
-    const date = this.state.datePrices;
+    console.log(this.state.todayBTC);
+    const date = this.state.todayBTC;
 
-    // @TODO
-    // this value need to be passed to the API request
     const { selectedDay } = this.state;
     console.log(moment(this.state.selectedDay).unix());
 
     return (
       <div>
         <IntroGainTracker />
-        <CurrentPrices prices={this.state.pricesBTC} />
+        {/* <CurrentPrices prices={this.state.pricesBTC} /> */}
         <TransactionContainer>
           <h2>Enter Transaction</h2>
 
@@ -100,7 +102,8 @@ export default class GainTracker extends Component {
         </TransactionContainer>
         Results here:
         <br />
-        {date.splice(0, 1).map(data => (
+        {date.BTC}
+        {/* {date.map(data => (
           <DayPurchase key={data.time}>
             <span>{moment.unix(data.time).format("LLL")}</span>
             <span>
@@ -112,7 +115,7 @@ export default class GainTracker extends Component {
             </span>
             <h1 style={{ color: "red" }}>{data.open}</h1>
           </DayPurchase>
-        ))}
+        ))} */}
         Your initial investment of 'xxx' is now <br />
         xxxx $ <br />
         you made xxx profit/loss
