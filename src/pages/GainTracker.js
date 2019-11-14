@@ -26,7 +26,7 @@ export default class GainTracker extends Component {
     // const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=GBP&limit=2000&toTs=${moment(
     //   this.state.selectedDay
     // ).unix()}&api_key=${process.env.REACT_APP_API_URL}`;
-    const link = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=GBP&ts=${moment(
+    const link = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=GBP,USD,ETH&ts=${moment(
       this.state.selectedDay
     ).unix()}`;
     const response = await cryptoCompare.get(link);
@@ -102,7 +102,8 @@ export default class GainTracker extends Component {
         </TransactionContainer>
         Results here:
         <br />
-        {date.BTC}
+        {date.GBP}
+        <br />
         {/* {date.map(data => (
           <DayPurchase key={data.time}>
             <span>{moment.unix(data.time).format("LLL")}</span>
