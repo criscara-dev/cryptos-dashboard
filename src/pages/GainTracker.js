@@ -19,7 +19,9 @@ export default class GainTracker extends Component {
     currentBTC: "",
     historicBTC: {},
     selectedDay: undefined,
-    cryptoAmount: 1
+    cryptoAmount: 1,
+    gain: undefined,
+    loss: undefined
   };
 
   getPriceHistoricData = async () => {
@@ -67,20 +69,29 @@ export default class GainTracker extends Component {
     // newHP = HP that consider the q.ty bought
     let newHP = this.state.cryptoAmount * 100;
     newHP = (newHP * HP) / 100;
+    let gainPercent;
+    let lossPercent;
+    let gain;
+    let loss;
     if (newCP > newHP) {
-      const gain = newCP - newHP;
-      const gainPercent = ((gain / newCP) * 100).toFixed(2);
+      gain = newCP - newHP;
+      gainPercent = parseInt(((gain / newCP) * 100).toFixed(2));
       console.log(`The profit is ${gainPercent} that is equal to £${gain}`);
     } else {
-      const loss = newHP - newCP;
-      const lossPercent = ((loss / newHP) * 100).toFixed(2);
+      loss = newHP - newCP;
+      lossPercent = parseInt(((loss / newHP) * 100).toFixed(2));
       console.log(`The loss is: ${lossPercent} that is  £${loss}`);
     }
+    this.setState({
+      gain,
+      loss
+    });
   };
 
   onInputChange = e => {
+    // console.log(typeof parseInt(e.target.value));
     this.setState({
-      cryptoAmount: e.target.value
+      cryptoAmount: parseInt(e.target.value)
     });
   };
 
@@ -91,8 +102,6 @@ export default class GainTracker extends Component {
     const { selectedDay } = this.state;
     // console.log(moment(this.state.selectedDay).unix());
 
-    console.log(`This is the amount: ${this.state.cryptoAmount}`);
-    console.log(this.props.gain);
     return (
       <div>
         <IntroGainTracker />
@@ -130,7 +139,8 @@ export default class GainTracker extends Component {
           currentPrice={this.state.currentBTC}
           currentQty={this.state.cryptoAmount}
           historicPrice={this.state.historicBTC.GBP}
-          gain={this.props.gain}
+          loss={this.state.loss}
+          gain={this.state.gain}
         />
       </div>
     );
