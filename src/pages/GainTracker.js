@@ -107,32 +107,31 @@ export default class GainTracker extends Component {
       <div>
         <IntroGainTracker />
         <TransactionContainer>
-          <h2>Enter Transaction</h2>
-
           <Form>
-            <label htmlFor="">Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="text"
               name="amount"
               value={this.state.cryptoAmount}
               onChange={this.onInputChange}
-              placeholder="ex. £ 1,000.00"
             />
-            <label htmlFor="">Date</label>
-            <DayPickerInput
-              formatDate={formatDate}
-              parseDate={parseDate}
-              placeholder={`${formatDate(new Date())}`}
-              value={selectedDay}
-              onDayChange={this.handleDayChange}
-              dayPickerProps={{
-                selectedDays: selectedDay,
-                localeUtils: MomentLocaleUtils
-              }}
-            />
-            <button type="submit" onClick={this.onClick}>
-              Check Profits
-            </button>
+            <label htmlFor="date">Date</label>
+            <Select>
+              <DayPickerInput
+                formatDate={formatDate}
+                parseDate={parseDate}
+                placeholder={`${formatDate(new Date())}`}
+                value={selectedDay}
+                onDayChange={this.handleDayChange}
+                dayPickerProps={{
+                  selectedDays: selectedDay,
+                  localeUtils: MomentLocaleUtils
+                }}
+              />
+            </Select>
+            <ButtonCheck type="submit" onClick={this.onClick}>
+              Check Now
+            </ButtonCheck>
           </Form>
         </TransactionContainer>
         <br />
@@ -167,4 +166,38 @@ const Form = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin: 1rem;
+
+  > label,
+  button {
+    margin: 0 1rem;
+  }
+  > label {
+    display: flex;
+    align-items: center;
+  }
+  > input {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    width: 3rem;
+    text-align: center;
+  }
+  div.DayPickerInput {
+    display: flex;
+  }
+`;
+
+const Select = styled.div`
+   {
+    display: flex;
+  }
+`;
+
+const ButtonCheck = styled.button`
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fd5f60;
+  color: #fff;
 `;

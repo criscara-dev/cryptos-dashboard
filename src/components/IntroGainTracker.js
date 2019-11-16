@@ -5,9 +5,12 @@ import styled from "styled-components";
 export default function IntroGainTracker() {
   return (
     <Message>
-      <h1 className="title">Create your CryptoCurrency Dashboard Today</h1>
+      <h1 className="title">
+        Check how your cryptoCurrency is performing today
+      </h1>
       <h3>
-        Register to Crypto-Dashboard for keep records of all your Coins gains.
+        <span style={{ color: "#fd5f60" }}>&#x2731;</span> Now available only
+        for Bitcoin
       </h3>
     </Message>
   );
@@ -19,8 +22,9 @@ const Message = styled.div`
   align-items: center;
   line-height: 42px;
   > .title {
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: capitalize;
     padding: 1rem 0;
+    text-align: center;
   }
 `;
