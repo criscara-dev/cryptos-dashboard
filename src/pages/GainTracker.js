@@ -21,7 +21,9 @@ export default class GainTracker extends Component {
     selectedDay: undefined,
     cryptoAmount: 1,
     gain: undefined,
-    loss: undefined
+    loss: undefined,
+    gainPercent: undefined,
+    lossPercent: undefined
   };
 
   getPriceHistoricData = async () => {
@@ -69,13 +71,10 @@ export default class GainTracker extends Component {
     // newHP = HP that consider the q.ty bought
     let newHP = this.state.cryptoAmount * 100;
     newHP = (newHP * HP) / 100;
-    let gainPercent;
-    let lossPercent;
-    let gain;
-    let loss;
+    let gainPercent, lossPercent, gain, loss;
     if (newCP > newHP) {
       gain = newCP - newHP;
-      gainPercent = parseInt(((gain / newCP) * 100).toFixed(2));
+      gainPercent = parseInt(((gain / newHP) * 100).toFixed(2));
       console.log(`The profit is ${gainPercent} that is equal to £${gain}`);
     } else {
       loss = newHP - newCP;
@@ -84,7 +83,9 @@ export default class GainTracker extends Component {
     }
     this.setState({
       gain,
-      loss
+      loss,
+      gainPercent,
+      lossPercent
     });
   };
 
@@ -96,8 +97,8 @@ export default class GainTracker extends Component {
   };
 
   render() {
-    console.log(this.state.currentBTC);
-    console.log(this.state.historicBTC);
+    // console.log(this.state.currentBTC);
+    // console.log(this.state.historicBTC);
 
     const { selectedDay } = this.state;
     // console.log(moment(this.state.selectedDay).unix());
@@ -141,6 +142,8 @@ export default class GainTracker extends Component {
           historicPrice={this.state.historicBTC.GBP}
           loss={this.state.loss}
           gain={this.state.gain}
+          gainPercent={this.state.gainPercent}
+          lossPercent={this.state.lossPercent}
         />
       </div>
     );
