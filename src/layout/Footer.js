@@ -5,39 +5,42 @@ export default function Footer() {
   return (
     <FooterContainer>
       <Footer1>
-        <h3>Crypto-dashboard</h3>
-        <a href="/">(000) 000 0000</a>
-        <a href="/">email@com</a>
-        <a href="/">@copyright</a>
+        <h3>Crypto Dashboard</h3>
+        <a href="tel:07769232333">077 692 323 33</a>
+        <a href="mailto:cristian.caratti.xx[at]gmail.com">
+          cristian.caratti.xx[at]gmail.com
+        </a>
+        <a href="/">@CrisCara 2019</a>
       </Footer1>
 
       <Footer2>
         <h3>Products</h3>
-        <a href="/">Commerce</a>
-        <a href="/">Pro</a>
-        <a href="/">Donate</a>
+        <a href="/coming-soon">Free Account</a>
+        <a href="/coming-soon">Pro</a>
+        <a href="/coming-soon">Donate</a>
       </Footer2>
 
       <Footer3>
         <h3>Learn</h3>
-        <a href="/">Buy Coins</a>
-        <a href="/">Taxes</a>
-        <a href="/">News</a>
+        <a href="/coming-soon">Buy Coins</a>
+        <a href="//oming-soon">Taxes</a>
+        <a href="/news">News</a>
       </Footer3>
 
       <Footer4>
         <h3>Company</h3>
         <a href="/">About</a>
-        <a href="/">Press</a>
-        <a href="/">Legal & Privacy</a>
-        <a href="/">Support</a>
+        <a href="/coming-soon">Legal & Privacy</a>
+        <a href="/coming-soon">Support</a>
       </Footer4>
 
       <Footer5>
         <h3>Social</h3>
-        <a href="/">Blog</a>
-        <a href="/">Twitter</a>
-        <a href="/">facebook</a>
+        <a href="/coming-soon">Blog</a>
+        <a href="https://twitter.com/criscaratti">Twitter</a>
+        <a href="https://www.linkedin.com/in/cristian-caratti-00a1b7136/">
+          LinkedIn
+        </a>
       </Footer5>
     </FooterContainer>
   );

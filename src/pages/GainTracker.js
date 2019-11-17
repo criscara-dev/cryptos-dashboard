@@ -27,7 +27,7 @@ export default class GainTracker extends Component {
   };
 
   getPriceHistoricData = async () => {
-    const link = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=GBP,USD,ETH&ts=${moment(
+    const link = `/pricehistorical?fsym=BTC&tsyms=GBP,USD,ETH&ts=${moment(
       this.state.selectedDay
     ).unix()}`;
     const response = await cryptoCompare.get(link);
@@ -190,6 +190,12 @@ const Form = styled.div`
 const Select = styled.div`
    {
     display: flex;
+
+    > .DayPickerInput > input:nth-child(1) {
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      width: 75%;
+    }
   }
 `;
 

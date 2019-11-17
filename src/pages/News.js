@@ -12,7 +12,6 @@ export default class News extends Component {
 
   getLatestNews = async () => {
     const link = `https://min-api.cryptocompare.com/data/v2/news/?lang=EN&api_key=${process.env.REACT_APP_API_URL}`;
-    // const link = `/top/totalvolfull?limit=10&tsym=GBP&api_key=${process.env.REACT_APP_API_URL}`;
     const response = await cryptoCompare.get(link);
     this.setState({
       news: response.data.Data
@@ -31,7 +30,7 @@ export default class News extends Component {
         <Intro>Last news:</Intro>
         <Center>
           {news.splice(0, 10).map(data => (
-            <NewsContainer>
+            <NewsContainer key={data.id}>
               <img src={`${data.source_info.img}`} alt={`coin ${data.id}`} />
               <Data>
                 <Title>{data.title}</Title>
@@ -49,15 +48,6 @@ export default class News extends Component {
                   <Span source>{data.source}</Span>
                   <Span>{moment.unix(data.published_on).calendar()}</Span>
                   <Span>CAT:{data.categories}</Span>
-                  {/* <Span>
-                    <a
-                      href={`${data.url}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      FULL READING
-                    </a>
-                  </Span> */}
                 </Spans>
               </Data>
             </NewsContainer>

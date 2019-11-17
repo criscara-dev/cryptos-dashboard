@@ -8,6 +8,7 @@ import cryptoCompare from "../api/cryptoCompare";
 // components
 import Welcome from "../components/Welcome";
 import Toplist24h from "../components/Toplist24h";
+// import HistoricalData from "./HistoricalData";
 
 const options = [
   { value: "GBP", label: "GBP currency" },
@@ -27,19 +28,29 @@ export default class Home extends Component {
   state = {
     selectValue: "GBP",
     data24h: []
+    // histoday: []
   };
 
   getTopList24h = async () => {
-    const link = `/top/totalvolfull?limit=10&tsym=${this.state.selectValue}&api_key=${process.env.REACT_APP_API_URL}`;
     // const link = `/top/totalvolfull?limit=10&tsym=GBP&api_key=${process.env.REACT_APP_API_URL}`;
+    const link = `/top/totalvolfull?limit=10&tsym=${this.state.selectValue}&api_key=${process.env.REACT_APP_API_URL}`;
     const response = await cryptoCompare.get(link);
     this.setState({
       data24h: response.data.Data
     });
   };
 
+  // getHistoday = async () => {
+  //   const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=10`;
+  //   const response = await cryptoCompare.get(link);
+  //   this.setState({
+  //     histoday: response.data.Data.Data
+  //   });
+  // };
+
   componentDidMount() {
     this.getTopList24h();
+    // this.getHistoday();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -55,6 +66,7 @@ export default class Home extends Component {
   render() {
     // console.log(this.state.data24h);
     // console.log(this.state.news);
+    // console.log(this.state.histoday);
 
     return (
       <div>

@@ -15,7 +15,7 @@ export default class Toplist24h extends Component {
           <TList24h>
             {data24.map(data => {
               const currency = data.DISPLAY[this.props.currency];
-              if(!currency) return null;
+              if (!currency) return null;
               return (
                 <CoinData key={data.CoinInfo.Id}>
                   <span>{data.CoinInfo.Name}</span>
@@ -70,8 +70,6 @@ export default class Toplist24h extends Component {
   }
 }
 
-const obj = {};
-
 const CenterAlign = styled.div`
   display: flex;
   justify-content: center;
@@ -82,36 +80,12 @@ const CenterAlign = styled.div`
   }
 `;
 
-// ALTERNATE 1
-
-// const TList24h = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   //   flex-flow: row wrap;
-//   width: 800px;
-//   overflow-x: scroll;
-// `;
-
-// const CoinData = styled.div`
-//   display: flex;
-//   flex-flow: column wrap;
-//   > span,
-//   > span h3 {
-//     margin: 1rem 0;
-//     padding: 0 0.2rem;
-//   }
-
-//   align-items: center;
-// `;
-
-// ALTERNATIVE STYLE TO TRY (2)
-
 const TList24h = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 400px;
-  overflow-y: scroll;
+  // height: 600px;
+  // overflow-x: scroll;
 `;
 
 const CoinData = styled.div`
