@@ -1,4 +1,5 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import reset from "styled-reset";
@@ -25,32 +26,61 @@ const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-gap: 1em;
-  // background-color: #191734;
-  // color: #fff;
+  background: ${props => props.theme.background};
 `;
 
-function App() {
-  return (
-    <Container>
-      <GlobalStyle />
-      <Router>
-        <Header />
-        <div>
-          {/* A <Switch> looks through its children <Route>s and
+const theme = {
+  light: {
+    background: "white",
+    color: "black"
+  },
+  dark: {
+    background: "#191734",
+    color: "white"
+  }
+};
+
+class App extends React.Component {
+  state = {
+    isLight: true
+  };
+
+  toggleTheme = () => this.setState({ isLight: !this.state.isLight });
+
+  render() {
+    return (
+      <ThemeProvider theme={this.state.isLight ? theme.light : theme.dark}>
+        <Container>
+          <GlobalStyle />
+          <Router>
+            <Header toggleTheme={this.toggleTheme} />
+            <div>
+              {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/historical-data/:coin" component={HistoricalData} />
-            <Route path="/gain-tracker" component={GainTracker} />
-            <Route path="/news" component={News} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
-        </div>
-        <Footer />
-      </Router>
-    </Container>
-  );
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route
+                  exact
+                  path="/historical-data"
+                  component={HistoricalData}
+                />
+                <Route
+                  exact
+                  path="/historical-data/:coin"
+                  component={HistoricalData}
+                />
+                <Route path="/gain-tracker" component={GainTracker} />
+                <Route path="/news" component={News} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+              </Switch>
+            </div>
+            <Footer />
+          </Router>
+        </Container>
+      </ThemeProvider>
+    );
+  }
 }
 
 export default App;

@@ -10,11 +10,7 @@ import Welcome from "../components/Welcome";
 import Toplist24h from "../components/Toplist24h";
 // import HistoricalData from "./HistoricalData";
 
-const options = [
-  { value: "GBP", label: "GBP currency" },
-  { value: "USD", label: "USD currency" },
-  { value: "EUR", label: "EUR currency" }
-];
+import options from '../api/cryptoOptions'
 
 const SelectContainer = styled.div`
   display: flex;

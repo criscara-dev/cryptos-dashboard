@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import styled from "styled-components";
 
-export default function Header() {
+export default withRouter(function Header(props) {
   return (
     <div>
       <HeaderContainer>
@@ -28,12 +28,12 @@ export default function Header() {
           <Li register>
             <Link to="/register">Register</Link>
           </Li>
+          <button onClick={props.toggleTheme}>Toggle theme</button>
         </NavRight>
       </HeaderContainer>
     </div>
   );
-}
-
+});
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
