@@ -5,6 +5,8 @@ import styled from "styled-components";
 import cryptoCompare from "../api/cryptoCompare";
 import moment from "moment";
 
+// import { Bar } from "react-chartjs-2";
+
 export default class HistoricalData extends Component {
   state = {
     histoday: []
@@ -27,21 +29,71 @@ export default class HistoricalData extends Component {
   }
 
   render() {
-    const histoday = this.state.histoday;
+    const { histoday } = this.state;
     console.log(this.props);
     console.log(histoday);
+
+    // const labels = this.props.chartData.map(t => {
+    //   const timeHisto = moment.unix(t.open).format("LLL");
+    //   return timeHisto;
+    // });
+
+    // const quotation = this.props.chartData.map(q => {
+    //   const priceHisto = q.open;
+    //   return priceHisto;
+    // });
+
+    // const data = {
+    //   labels: labels,
+    //   datasets: [
+    //     {
+    //       type: "bar",
+    //       label: "Value",
+    //       data: quotation,
+    //       backgroundColor: "#ffce35",
+    //       barThickness: 2
+    //     }
+    //   ]
+    // };
+
     return (
-      <DataGraph>
-        {this.props.match.params.coin}
-        {histoday.map(data => {
-          return (
-            <div key={data.id}>
-              <Span>{data.open}</Span>
-              <Span>{moment.unix(data.time).format("LLL")}</Span>
-            </div>
-          );
-        })}
-      </DataGraph>
+      <div>
+        <DataGraph>
+          {this.props.match.params.coin}
+          {histoday.map(data => {
+            return (
+              <div key={data.id}>
+                <Span>{data.open}</Span>
+                <Span>{moment.unix(data.time).format("LLL")}</Span>
+              </div>
+            );
+          })}
+        </DataGraph>
+
+        {/* <Bar
+          data={data}
+          options={{
+            title: {
+              display: true,
+              text: "Market price tracker",
+              fontSize: 25
+            },
+            legend: {
+              display: true,
+              position: "bottom"
+            },
+            scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    beginAtZero: false
+                  }
+                }
+              ]
+            }
+          }}
+        /> */}
+      </div>
     );
   }
 }
