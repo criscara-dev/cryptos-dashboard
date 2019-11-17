@@ -8,9 +8,8 @@ import cryptoCompare from "../api/cryptoCompare";
 // components
 import Welcome from "../components/Welcome";
 import Toplist24h from "../components/Toplist24h";
-// import HistoricalData from "./HistoricalData";
 
-import options from '../api/cryptoOptions'
+import options from "../api/cryptoOptions";
 
 const SelectContainer = styled.div`
   display: flex;
@@ -24,7 +23,6 @@ export default class Home extends Component {
   state = {
     selectValue: "GBP",
     data24h: []
-    // histoday: []
   };
 
   getTopList24h = async () => {
@@ -36,17 +34,8 @@ export default class Home extends Component {
     });
   };
 
-  // getHistoday = async () => {
-  //   const link = `https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=10`;
-  //   const response = await cryptoCompare.get(link);
-  //   this.setState({
-  //     histoday: response.data.Data.Data
-  //   });
-  // };
-
   componentDidMount() {
     this.getTopList24h();
-    // this.getHistoday();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -62,7 +51,6 @@ export default class Home extends Component {
   render() {
     // console.log(this.state.data24h);
     // console.log(this.state.news);
-    // console.log(this.state.histoday);
 
     return (
       <div>

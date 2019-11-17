@@ -26,7 +26,8 @@ const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-gap: 1em;
-  background: ${props => props.theme.background};
+  background-color: ${props => props.theme.background};
+  color: ${props => props.theme.color};
 `;
 
 const theme = {

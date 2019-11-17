@@ -7,7 +7,7 @@ import cryptoCompare from "../api/cryptoCompare";
 import moment from "moment";
 import { coins as options } from "../api/cryptoOptions";
 
-// import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 export default class HistoricalData extends Component {
   state = {
@@ -23,7 +23,7 @@ export default class HistoricalData extends Component {
     }
     try {
       this.setState({ loading: true, availableCoin: true });
-      const link = `/v2/histoday?fsym=${coin}&tsym=GBP&limit=20&aggregate=1&toTs=${Math.round(
+      const link = `/v2/histoday?fsym=${coin}&tsym=GBP&limit=50&aggregate=1&toTs=${Math.round(
         new Date().getTime() / 1000
       )}`;
       const response = await cryptoCompare.get(link);
@@ -36,7 +36,7 @@ export default class HistoricalData extends Component {
         histoday: response.data.Data.Data,
         loading: false
       });
-    } catch (err) {
+    } catch (error) {
       this.setState({ loading: false, error: true });
     }
   };
@@ -46,7 +46,6 @@ export default class HistoricalData extends Component {
   };
 
   componentDidMount() {
-    console.log("here mounting");
     this.getHistoday();
   }
 
@@ -60,28 +59,28 @@ export default class HistoricalData extends Component {
     const { histoday, availableCoin } = this.state;
     console.log(this.state);
 
-    // const labels = this.props.chartData.map(t => {
-    //   const timeHisto = moment.unix(t.open).format("LLL");
-    //   return timeHisto;
-    // });
+    const labels = histoday.map(label => {
+      const timeHisto = moment.unix(label.time).format("D/M - H");
+      return timeHisto;
+    });
 
-    // const quotation = this.props.chartData.map(q => {
-    //   const priceHisto = q.open;
-    //   return priceHisto;
-    // });
+    const quotations = histoday.map(quotation => {
+      const priceHisto = quotation.open;
+      return priceHisto;
+    });
 
-    // const data = {
-    //   labels: labels,
-    //   datasets: [
-    //     {
-    //       type: "bar",
-    //       label: "Value",
-    //       data: quotation,
-    //       backgroundColor: "#ffce35",
-    //       barThickness: 2
-    //     }
-    //   ]
-    // };
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          type: "line",
+          label: "Price",
+          data: quotations,
+          borderColor: "#928fff",
+          lineTension: 0
+        }
+      ]
+    };
 
     if (!availableCoin) {
       return (
@@ -99,8 +98,9 @@ export default class HistoricalData extends Component {
 
     return (
       <div>
+        <H1>{this.props.match.params.coin}</H1>
         <DataGraph>
-          {this.props.match.params.coin}
+          {/* {this.props.match.params.coin}
           {histoday &&
             histoday.map(data => {
               return (
@@ -109,30 +109,17 @@ export default class HistoricalData extends Component {
                   <Span>{moment.unix(data.time).format("LLL")}</Span>
                 </div>
               );
-            })}
+            })} */}
         </DataGraph>
-      </div>
-    );
-  }
-}
-
-const DataGraph = styled.div`
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-`;
-
-const Span = styled.div`
-  padding: 0.3rem;
-`;
-
-/* <Bar
+        <Line
           data={data}
+          width={100}
+          height={50}
           options={{
             title: {
               display: true,
-              text: "Market price tracker",
-              fontSize: 25
+              text: "Coin Chart",
+              fontSize: 16
             },
             legend: {
               display: true,
@@ -148,4 +135,19 @@ const Span = styled.div`
               ]
             }
           }}
-        /> */
+        />
+      </div>
+    );
+  }
+}
+
+const DataGraph = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+`;
+
+const H1 = styled.div`
+  display: flex;
+  justify-content: center;
+`;

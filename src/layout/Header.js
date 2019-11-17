@@ -9,24 +9,36 @@ export default withRouter(function Header(props) {
       <HeaderContainer>
         <NavLeft>
           <Li>
-            <Link to="/">Home-Logo</Link>
+            <Link className="nodeco" to="/">
+              Home-Logo
+            </Link>
           </Li>
           <Li>
-            <Link to="/historical-data">HistoricalData</Link>
+            <Link className="nodeco" to="/historical-data">
+              HistoricalData
+            </Link>
           </Li>
           <Li>
-            <Link to="/news">News</Link>
+            <Link className="nodeco" to="/news">
+              News
+            </Link>
           </Li>
           <Li>
-            <Link to="/gain-tracker">GainTracker</Link>
+            <Link className="nodeco" to="/gain-tracker">
+              GainTracker
+            </Link>
           </Li>
         </NavLeft>
         <NavRight>
           <Li login>
-            <Link to="/login">Login</Link>
+            <Link className="nodeco" to="/login">
+              Login
+            </Link>
           </Li>
           <Li register>
-            <Link to="/register">Register</Link>
+            <Link className="nodeco" to="/register">
+              Register
+            </Link>
           </Li>
           <button onClick={props.toggleTheme}>Toggle theme</button>
         </NavRight>
@@ -54,4 +66,7 @@ const Li = styled.div`
   justify-content: row wrap;
   list-style-type: none;
   padding: 0.5rem;
+  .nodeco {
+    text-decoration: none;
+  }
 `;
