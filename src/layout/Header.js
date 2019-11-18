@@ -69,4 +69,7 @@ const Li = styled.div`
   .nodeco {
     text-decoration: none;
   }
+  .nodeco:hover {
+    color: #2ef1a4;
+  }
 `;

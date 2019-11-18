@@ -76,7 +76,8 @@ export default class HistoricalData extends Component {
           type: "line",
           label: "Price",
           data: quotations,
-          borderColor: "#928fff",
+          // borderColor: "#928fff",
+          borderColor: "#2ef1a4",
           lineTension: 0
         }
       ]
@@ -84,70 +85,73 @@ export default class HistoricalData extends Component {
 
     if (!availableCoin) {
       return (
-        <div>
-          No coin selected
+        <DefaultSelect>
+          <h1>Please select a coin:</h1>
           <Select
             className="select"
             options={options}
             onChange={this.onHandleSelect}
             defaultValue={options[0]}
           />
-        </div>
+        </DefaultSelect>
       );
     }
 
     return (
-      <div>
-        <H1>{this.props.match.params.coin}</H1>
-        <DataGraph>
-          {/* {this.props.match.params.coin}
-          {histoday &&
-            histoday.map(data => {
-              return (
-                <div key={data.id}>
-                  <Span>{data.open}</Span>
-                  <Span>{moment.unix(data.time).format("LLL")}</Span>
-                </div>
-              );
-            })} */}
-        </DataGraph>
-        <Line
-          data={data}
-          width={100}
-          height={50}
-          options={{
-            title: {
-              display: true,
-              text: "Coin Chart",
-              fontSize: 16
-            },
-            legend: {
-              display: true,
-              position: "bottom"
-            },
-            scales: {
-              xAxes: [
-                {
-                  ticks: {
-                    beginAtZero: false
+      <Charts>
+        <LineChart>
+          <H1>{this.props.match.params.coin}</H1>
+          <Line
+            data={data}
+            width={100}
+            height={50}
+            options={{
+              title: {
+                display: true,
+                text: "Coin Chart",
+                fontSize: 16
+              },
+              legend: {
+                display: true,
+                position: "bottom"
+              },
+              scales: {
+                xAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: false
+                    }
                   }
-                }
-              ]
-            }
-          }}
-        />
-      </div>
+                ]
+              }
+            }}
+          />
+        </LineChart>
+        <PieChart>New Pie Chart here</PieChart>
+      </Charts>
     );
   }
 }
-
-const DataGraph = styled.div`
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-`;
 
 const H1 = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+const DefaultSelect = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  align-items: center;
+  & > .select {
+    width: 200px;
+  }
+`;
+
+const Charts = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+`;
+
+const LineChart = styled.div``;
+const PieChart = styled.div``;

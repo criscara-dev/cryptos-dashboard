@@ -22,10 +22,11 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 100%;
-  flex-wrap: wrap;
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
+  grid-template-rows: 1fr 6fr 2fr;
   grid-gap: 1em;
+  padding: 2rem;
   background-color: ${props => props.theme.background};
   color: ${props => props.theme.color};
 `;
