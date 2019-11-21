@@ -9,8 +9,8 @@ import Footer from "./layout/Footer";
 import HistoricalData from "./pages/HistoricalData";
 import Home from "./pages/Home";
 import News from "./pages/News";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
 import GainTracker from "./pages/GainTracker";
 
 import { createGlobalStyle } from "styled-components";
@@ -22,12 +22,12 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   font-family: "Montserrat", sans-serif;
   font-size: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 6fr 2fr;
-  grid-gap: 1em;
+
+  grid-gap: 1rem;
   padding: 2rem;
-  background-color: ${props => props.theme.background};
+  background: ${props => props.theme.background};
   color: ${props => props.theme.color};
 `;
 
@@ -35,10 +35,12 @@ const theme = {
   light: {
     background: "white",
     color: "black"
+    // lightBtn: "#00cc8a"
   },
   dark: {
     background: "#191734",
     color: "white"
+    // darkBtn: "#00cc8a"
   }
 };
 
@@ -73,8 +75,8 @@ class App extends React.Component {
                 />
                 <Route path="/gain-tracker" component={GainTracker} />
                 <Route path="/news" component={News} />
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
+                {/* <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} /> */}
               </Switch>
             </div>
             <Footer />

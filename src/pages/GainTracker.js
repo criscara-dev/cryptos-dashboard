@@ -115,7 +115,7 @@ export default class GainTracker extends Component {
               value={this.state.cryptoAmount}
               onChange={this.onInputChange}
             />
-            <label htmlFor="date">Date</label>
+            <label htmlFor="date">Query Date</label>
             <Select>
               <DayPickerInput
                 formatDate={formatDate}
@@ -166,7 +166,7 @@ const Form = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin: 1rem;
+  margin: 1rem 0;
 
   > label,
   button {
@@ -194,7 +194,7 @@ const Select = styled.div`
     > .DayPickerInput > input:nth-child(1) {
       font-size: 1rem;
       border-radius: 0.5rem;
-      width: 75%;
+      max-width: 50%;
     }
   }
 `;

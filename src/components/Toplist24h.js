@@ -57,7 +57,7 @@ export default class Toplist24h extends Component {
                   </span>
                   <span>
                     <Link to={`historical-data/${data.CoinInfo.Name}`}>
-                      Historical data about {data.CoinInfo.Name}
+                      Check Histo-data: {data.CoinInfo.Name}
                     </Link>
                   </span>
                 </CoinData>
@@ -77,6 +77,10 @@ const CenterAlign = styled.div`
   flex-flow: column wrap;
   > h2 {
     font-size: 2rem;
+    color: #928fff;
+    border-bottom: 10px solid #00faa6;
+    scrollbar-color: rebeccapurple green;
+    margin: 1rem 0;
   }
 `;
 
@@ -84,15 +88,15 @@ const TList24h = styled.div`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  // height: 600px;
-  // overflow-x: scroll;
+  height: 600px;
+  overflow-x: scroll;
 `;
 
 const CoinData = styled.div`
   display: flex;
   > span,
   > span h3 {
-    margin: 1rem 0;
+    margin: 2rem 0.3rem;
     padding: 0 0.2rem;
   }
   align-items: center;

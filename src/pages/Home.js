@@ -16,7 +16,9 @@ const SelectContainer = styled.div`
   justify-content: center;
   & > .select {
     width: 200px;
+    color: #928fff;
   }
+  margin: 1rem 0;
 `;
 
 export default class Home extends Component {
@@ -49,7 +51,7 @@ export default class Home extends Component {
   };
 
   render() {
-    // console.log(this.state.data24h);
+    console.log(this.state.data24h);
     // console.log(this.state.news);
 
     return (

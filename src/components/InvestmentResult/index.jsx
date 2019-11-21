@@ -23,8 +23,8 @@ return
             <PricesContainer>
           <Table>
             <div> <span>Q.ty </span><span>{currentQty}</span></div>
-            <div><span>Today Price:</span> <span>£{currentPrice.GBP}</span></div>
-            <div><span>Purchase Price: </span><span> £{historicPrice}</span></div>         
+            <div><span>Today Price:</span> <span>£ {currentPrice.GBP}</span></div>
+            <div><span>Purchase Price: </span><span> £ {historicPrice}</span></div>         
           </Table>
           <h4>{checkGain()}</h4>
         </PricesContainer>

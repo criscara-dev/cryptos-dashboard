@@ -12,12 +12,13 @@ import { Line } from "react-chartjs-2";
 export default class HistoricalData extends Component {
   state = {
     histoday: [],
-    availableCoin: true
+    availableCoin: true,
+    symbolsFulldata: []
   };
 
   getHistoday = async () => {
     const { coin } = this.props.match.params;
-    console.log(this.props.match);
+    // console.log(this.props.match);
     if (!coin) {
       return this.setState({ availableCoin: null });
     }
@@ -27,7 +28,7 @@ export default class HistoricalData extends Component {
         new Date().getTime() / 1000
       )}`;
       const response = await cryptoCompare.get(link);
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.Response === "Error") {
         this.setState({ loading: false });
         return this.props.history.push("/not-found");
@@ -41,26 +42,54 @@ export default class HistoricalData extends Component {
     }
   };
 
+  getSymbolsFulldata = async () => {
+    const { coin } = this.props.match.params;
+    console.log(this.props.match);
+    if (!coin) {
+      return this.setState({ availableCoin: null });
+    }
+    try {
+      this.setState({ loading: true, availableCoin: true });
+      const link = `/pricemultifull?fsyms=${coin}&tsyms=GBP,EUR,USD`;
+      const response = await cryptoCompare.get(link);
+      console.log(response.data.DISPLAY[coin]);
+      if (response.data.Response === "Error") {
+        this.setState({ loading: false });
+        return this.props.history.push("/not-found");
+      }
+      this.setState({
+        symbolsFulldata: response.data.DISPLAY[coin],
+        loading: false
+      });
+    } catch (error) {
+      this.setState({ loading: false, error: true });
+    }
+  };
+
   onHandleSelect = data => {
     this.props.history.push(`/historical-data/${data.value}`);
   };
 
   componentDidMount() {
     this.getHistoday();
+    this.getSymbolsFulldata();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.coin !== prevProps.match.params.coin) {
       this.getHistoday();
+      this.getSymbolsFulldata();
     }
   }
 
   render() {
     const { histoday, availableCoin } = this.state;
-    console.log(this.state);
+    // console.log(this.state);
+    const dataFull = this.state.symbolsFulldata["EUR"];
+    console.log(`typeof ${dataFull}`, dataFull);
 
     const labels = histoday.map(label => {
-      const timeHisto = moment.unix(label.time).format("D/M - H");
+      const timeHisto = moment.unix(label.time).format("lll");
       return timeHisto;
     });
 
@@ -98,9 +127,9 @@ export default class HistoricalData extends Component {
     }
 
     return (
-      <Charts>
+      <div>
         <LineChart>
-          <H1>{this.props.match.params.coin}</H1>
+          <H1>Trend for {this.props.match.params.coin}</H1>
           <Line
             data={data}
             width={100}
@@ -127,8 +156,8 @@ export default class HistoricalData extends Component {
             }}
           />
         </LineChart>
-        <PieChart>New Pie Chart here</PieChart>
-      </Charts>
+        <About></About>
+      </div>
     );
   }
 }
@@ -145,13 +174,13 @@ const DefaultSelect = styled.div`
   align-items: center;
   & > .select {
     width: 200px;
+    color: #928fff;
   }
 `;
 
-const Charts = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+const LineChart = styled.div`
+  padding: 3rem;
 `;
-
-const LineChart = styled.div``;
-const PieChart = styled.div``;
+const About = styled.div`
+  padding: 3rem;
+`;

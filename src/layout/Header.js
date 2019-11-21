@@ -10,27 +10,27 @@ export default withRouter(function Header(props) {
         <NavLeft>
           <Li>
             <Link className="nodeco" to="/">
-              Home-Logo
+              HOME
             </Link>
           </Li>
           <Li>
             <Link className="nodeco" to="/historical-data">
-              HistoricalData
+              HISTORICAL DATA
             </Link>
           </Li>
           <Li>
             <Link className="nodeco" to="/news">
-              News
+              NEWS
             </Link>
           </Li>
           <Li>
             <Link className="nodeco" to="/gain-tracker">
-              GainTracker
+              GAINTRACKER
             </Link>
           </Li>
         </NavLeft>
         <NavRight>
-          <Li login>
+          {/* <Li login>
             <Link className="nodeco" to="/login">
               Login
             </Link>
@@ -39,8 +39,8 @@ export default withRouter(function Header(props) {
             <Link className="nodeco" to="/register">
               Register
             </Link>
-          </Li>
-          <button onClick={props.toggleTheme}>Toggle theme</button>
+          </Li> */}
+          <ButtonToggle onClick={props.toggleTheme}>Toggle Theme</ButtonToggle>
         </NavRight>
       </HeaderContainer>
     </div>
@@ -68,8 +68,15 @@ const Li = styled.div`
   padding: 0.5rem;
   .nodeco {
     text-decoration: none;
+    color: #6e748e !important;
   }
   .nodeco:hover {
     color: #2ef1a4;
   }
+`;
+
+const ButtonToggle = styled.div`
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 2px solid #1a1736;
 `;

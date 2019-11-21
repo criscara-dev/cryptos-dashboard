@@ -1,46 +1,68 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Footer() {
   return (
     <FooterContainer>
       <FooterColumn>
-        <h3>Crypto Dashboard</h3>
-        <a href="tel:07769232333">077 692 323 33</a>
-        <a href="mailto:cristian.caratti.xx[at]gmail.com">
-          cristian.caratti.xx[at]gmail.com
-        </a>
-        <a href="/">@CrisCara 2019</a>
+        <H3>CRYPTO DASHBOARD</H3>
+        <Li>
+          <Link className="nodeco" to="tel:07769232333">
+            077 692 323 33
+          </Link>
+        </Li>
+        <Li>
+          <Link className="nodeco" to="mailto:cristian.caratti.xx[at]gmail.com">
+            cristian.caratti.xx[at]gmail.com
+          </Link>
+        </Li>
+        <Li className="nodeco">
+          <Link className="nodeco" to="/">
+            @CrisCara 2019
+          </Link>
+        </Li>
       </FooterColumn>
 
       <FooterColumn>
-        <h3>Products</h3>
-        <a href="/coming-soon">Free Account</a>
-        <a href="/coming-soon">Pro</a>
-        <a href="/coming-soon">Donate</a>
+        <H3>MENU</H3>
+        <Li>
+          <Link className="nodeco" to="/">
+            HOME
+          </Link>
+        </Li>
+        <Li>
+          <Link className="nodeco" to="/historical-data">
+            HISTORICAL DATA
+          </Link>
+        </Li>
+        <Li>
+          <Link className="nodeco" to="/news">
+            NEWS
+          </Link>
+        </Li>
+        <Li>
+          <Link className="nodeco" to="/gain-tracker">
+            GAINTRACKER
+          </Link>
+        </Li>
       </FooterColumn>
 
       <FooterColumn>
-        <h3>Learn</h3>
-        <a href="/coming-soon">Buy Coins</a>
-        <a href="/coming-soon">Taxes</a>
-        <a href="/news">News</a>
-      </FooterColumn>
-
-      <FooterColumn>
-        <h3>Company</h3>
-        <a href="/">About</a>
-        <a href="/coming-soon">Legal & Privacy</a>
-        <a href="/coming-soon">Support</a>
-      </FooterColumn>
-
-      <FooterColumn>
-        <h3>Social</h3>
-        <a href="/coming-soon">Blog</a>
-        <a href="https://twitter.com/criscaratti">Twitter</a>
-        <a href="https://www.linkedin.com/in/cristian-caratti-00a1b7136/">
-          LinkedIn
-        </a>
+        <H3>SOCIAL</H3>
+        <Li>
+          <Link
+            className="nodeco"
+            to="https://www.linkedin.com/in/cristian-caratti-00a1b7136/"
+          >
+            LINKEDIN
+          </Link>
+        </Li>
+        <Li>
+          <Link className="nodeco" to="https://twitter.com/criscaratti">
+            TWITTER
+          </Link>
+        </Li>
       </FooterColumn>
     </FooterContainer>
   );
@@ -50,10 +72,31 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: space-around;
   flex-flow: row wrap;
-  align-items: center;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-top: 2px solid #00faa6;
 `;
 
 const FooterColumn = styled.div`
   display: flex;
   flex-flow: column wrap;
+  flex
+`;
+
+const Li = styled.div`
+  display: flex;
+  justify-content: row wrap;
+  list-style-type: none;
+  padding: 0.5rem;
+  .nodeco {
+    text-decoration: none;
+    color: #6e748e !important;
+  }
+  .nodeco:hover {
+    color: #2ef1a4;
+  }
+`;
+
+const H3 = styled.div`
+  padding: 0.5rem;
 `;
