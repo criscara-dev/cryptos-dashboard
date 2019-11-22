@@ -1,6 +1,15 @@
 import React from "react";
+
+// Libraries
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { twitter, linkedin } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitterSquare,
+  faLinkedin
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
@@ -49,18 +58,18 @@ export default function Footer() {
       </FooterColumn>
 
       <FooterColumn>
-        <H3>SOCIAL</H3>
+        <H3>SOCIALS</H3>
         <Li>
           <Link
             className="nodeco"
             to="https://www.linkedin.com/in/cristian-caratti-00a1b7136/"
           >
-            LINKEDIN
+            <FontAwesomeIcon icon={faLinkedin} size="3x" color="#0077B5" />
           </Link>
         </Li>
         <Li>
           <Link className="nodeco" to="https://twitter.com/criscaratti">
-            TWITTER
+            <FontAwesomeIcon icon={faTwitterSquare} size="3x" color="#55acee" />
           </Link>
         </Li>
       </FooterColumn>

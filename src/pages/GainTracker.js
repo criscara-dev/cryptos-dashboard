@@ -75,11 +75,11 @@ export default class GainTracker extends Component {
     if (newCP > newHP) {
       gain = newCP - newHP;
       gainPercent = parseInt(((gain / newHP) * 100).toFixed(2));
-      console.log(`The profit is ${gainPercent} that is equal to £${gain}`);
+      // console.log(`The profit is ${gainPercent} that is equal to £${gain}`);
     } else {
       loss = newHP - newCP;
       lossPercent = parseInt(((loss / newHP) * 100).toFixed(2));
-      console.log(`The loss is: ${lossPercent} that is  £${loss}`);
+      // console.log(`The loss is: ${lossPercent} that is  £${loss}`);
     }
     this.setState({
       gain,
@@ -120,7 +120,8 @@ export default class GainTracker extends Component {
               <DayPickerInput
                 formatDate={formatDate}
                 parseDate={parseDate}
-                placeholder={`${formatDate(new Date())}`}
+                // placeholder={`${formatDate(new Date())}`}
+                placeholder={`mm/dd/yyyy`}
                 value={selectedDay}
                 onDayChange={this.handleDayChange}
                 dayPickerProps={{

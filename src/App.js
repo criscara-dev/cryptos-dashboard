@@ -24,7 +24,6 @@ const Container = styled.div`
   font-size: 100%;
   min-height: 100vh;
   display: grid;
-
   grid-gap: 1rem;
   padding: 2rem;
   background: ${props => props.theme.background};

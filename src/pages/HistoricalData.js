@@ -44,7 +44,7 @@ export default class HistoricalData extends Component {
 
   getSymbolsFulldata = async () => {
     const { coin } = this.props.match.params;
-    console.log(this.props.match);
+    // console.log(this.props.match);
     if (!coin) {
       return this.setState({ availableCoin: null });
     }

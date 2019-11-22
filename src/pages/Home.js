@@ -7,9 +7,12 @@ import cryptoCompare from "../api/cryptoCompare";
 
 // components
 import Welcome from "../components/Welcome";
-import Toplist24h from "../components/Toplist24h";
+import Toplist24h from "../components/Toplist24h/index";
 
 import options from "../api/cryptoOptions";
+
+// assets
+// import Background from "../assets/images/undraw_connected_world_wuay.svg";
 
 const SelectContainer = styled.div`
   display: flex;
@@ -51,11 +54,12 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log(this.state.data24h);
+    // console.log(this.state.data24h);
     // console.log(this.state.news);
 
     return (
       <div>
+        {/* <Content> */}
         <Welcome />
         <SelectContainer>
           <Select
@@ -69,7 +73,17 @@ export default class Home extends Component {
           toplist24={this.state.data24h}
           currency={this.state.selectValue}
         />
+        {/* </Content> */}
       </div>
     );
   }
 }
+
+// const Content = styled.div`
+//   border: 1px solid #000;
+//   background-image: url(${Background});
+//   background-repeat: no-repeat;
+//   background-cover: cover;
+//   min-width: 100vw;
+//   height: auto;
+// `;
