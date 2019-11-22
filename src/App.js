@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import styled from "styled-components";
+// import styled from "styled-components";
 import reset from "styled-reset";
 
 import Header from "./layout/Header";
@@ -15,20 +15,23 @@ import GainTracker from "./pages/GainTracker";
 
 import { createGlobalStyle } from "styled-components";
 
+import { Container } from "./components/CustomStyles";
+import Notfound from "./components/Not-found";
+
 const GlobalStyle = createGlobalStyle`
  ${reset}
 `;
 
-const Container = styled.div`
-  font-family: "Montserrat", sans-serif;
-  font-size: 100%;
-  min-height: 100vh;
-  display: grid;
-  grid-gap: 1rem;
-  padding: 2rem;
-  background: ${props => props.theme.background};
-  color: ${props => props.theme.color};
-`;
+// const Container = styled.div`
+//   font-family: "Montserrat", sans-serif;
+//   font-size: 100%;
+//   min-height: 100vh;
+//   display: grid;
+//   grid-gap: 1rem;
+//   padding: 2rem;
+//   background: ${props => props.theme.background};
+//   color: ${props => props.theme.color};
+// `;
 
 const theme = {
   light: {
@@ -74,6 +77,7 @@ class App extends React.Component {
                 />
                 <Route path="/gain-tracker" component={GainTracker} />
                 <Route path="/news" component={News} />
+                <Route exact path="/not-found" component={Notfound} />
                 {/* <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} /> */}
               </Switch>
