@@ -18,12 +18,12 @@ export default class GainTracker extends Component {
   state = {
     currentBTC: "",
     historicBTC: {},
-    selectedDay: undefined,
+    selectedDay: null,
     cryptoAmount: 1,
-    gain: undefined,
-    loss: undefined,
-    gainPercent: undefined,
-    lossPercent: undefined
+    gain: null,
+    loss: null,
+    gainPercent: null,
+    lossPercent: null
   };
 
   getPriceHistoricData = async () => {
@@ -91,8 +91,12 @@ export default class GainTracker extends Component {
 
   onInputChange = e => {
     // console.log(typeof parseInt(e.target.value));
+
+    if (isNaN(parseInt(e.target.value)))
+      return this.setState({ cryptoAmountError: true });
     this.setState({
-      cryptoAmount: parseInt(e.target.value)
+      cryptoAmount: parseInt(e.target.value),
+      cryptoAmountError: false
     });
   };
 
@@ -103,33 +107,40 @@ export default class GainTracker extends Component {
     const { selectedDay } = this.state;
     // console.log(moment(this.state.selectedDay).unix());
 
+    console.log(this.state.cryptoAmount);
+
     return (
       <div>
         <IntroGainTracker />
         <TransactionContainer>
           <Form>
-            <label htmlFor="amount">Amount</label>
-            <input
-              type="text"
-              name="amount"
-              value={this.state.cryptoAmount}
-              onChange={this.onInputChange}
-            />
-            <label htmlFor="date">Query Date</label>
-            <Select>
-              <DayPickerInput
-                formatDate={formatDate}
-                parseDate={parseDate}
-                // placeholder={`${formatDate(new Date())}`}
-                placeholder={`mm/dd/yyyy`}
-                value={selectedDay}
-                onDayChange={this.handleDayChange}
-                dayPickerProps={{
-                  selectedDays: selectedDay,
-                  localeUtils: MomentLocaleUtils
-                }}
-              />
-            </Select>
+            <div>
+              <label htmlFor="amount">
+                {this.state.cryptoAmountError
+                  ? "You need to type a number"
+                  : "Amount"}
+              </label>
+
+              <input type="text" name="amount" onBlur={this.onInputChange} />
+            </div>
+            <div>
+              <label htmlFor="date">Query Date</label>
+              <Select>
+                <DayPickerInput
+                  formatDate={formatDate}
+                  parseDate={parseDate}
+                  // placeholder={`${formatDate(new Date())}`}
+                  placeholder={`mm/dd/yyyy`}
+                  value={selectedDay}
+                  onDayChange={this.handleDayChange}
+                  dayPickerProps={{
+                    selectedDays: selectedDay,
+                    localeUtils: MomentLocaleUtils
+                  }}
+                />
+              </Select>
+            </div>
+
             <ButtonCheck type="submit" onClick={this.onClick}>
               Check Now
             </ButtonCheck>
@@ -173,10 +184,6 @@ const Form = styled.div`
   button {
     margin: 0 1rem;
   }
-  > label {
-    display: flex;
-    align-items: center;
-  }
   > input {
     border-radius: 0.5rem;
     font-size: 1rem;
@@ -185,6 +192,10 @@ const Form = styled.div`
   }
   div.DayPickerInput {
     display: flex;
+  }
+
+  label {
+    display: block;
   }
 `;
 

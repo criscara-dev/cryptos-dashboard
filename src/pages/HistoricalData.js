@@ -13,7 +13,7 @@ export default class HistoricalData extends Component {
   state = {
     histoday: [],
     availableCoin: true,
-    symbolsFulldata: []
+    symbolsFulldata: null
   };
 
   getHistoday = async () => {
@@ -52,11 +52,13 @@ export default class HistoricalData extends Component {
       this.setState({ loading: true, availableCoin: true });
       const link = `/pricemultifull?fsyms=${coin}&tsyms=GBP,EUR,USD`;
       const response = await cryptoCompare.get(link);
-      console.log(response.data.DISPLAY[coin]);
+      console.log(response.data.DISPLAY);
       if (response.data.Response === "Error") {
         this.setState({ loading: false });
         return this.props.history.push("/not-found");
       }
+
+      console.log(response.data.DISPLAY[coin]["EUR"], { coin });
       this.setState({
         symbolsFulldata: response.data.DISPLAY[coin],
         loading: false
@@ -85,18 +87,13 @@ export default class HistoricalData extends Component {
   render() {
     const { histoday, availableCoin } = this.state;
     // console.log(this.state);
-    const dataFull = this.state.symbolsFulldata["EUR"];
-    console.log(`typeof ${dataFull}`, dataFull);
+    const dataFull =
+      this.state.symbolsFulldata && this.state.symbolsFulldata["EUR"];
+    // console.log(`typeof ${dataFull}`, dataFull);
 
-    const labels = histoday.map(label => {
-      const timeHisto = moment.unix(label.time).format("lll");
-      return timeHisto;
-    });
+    const labels = histoday.map(label => moment.unix(label.time).format("lll"));
 
-    const quotations = histoday.map(quotation => {
-      const priceHisto = quotation.open;
-      return priceHisto;
-    });
+    const quotations = histoday.map(({ open }) => open);
 
     const data = {
       labels: labels,
@@ -156,7 +153,13 @@ export default class HistoricalData extends Component {
             }}
           />
         </LineChart>
-        <About></About>
+        {dataFull &&
+          Object.keys(dataFull).map(key => (
+            <div>
+              <span>{key}</span>
+              <span>{dataFull[key]}</span>
+            </div>
+          ))}
       </div>
     );
   }

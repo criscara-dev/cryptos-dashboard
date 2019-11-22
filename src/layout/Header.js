@@ -78,5 +78,6 @@ const Li = styled.div`
 const ButtonToggle = styled.div`
   border-radius: 1rem;
   padding: 1rem;
-  border: 2px solid #1a1736;
+  border: 2px solid ${props => props.theme.main};
+  background: ${props => props.theme.secondary};
 `;

@@ -1,11 +1,7 @@
 import React from "react";
-
-// Libraries:
 import styled from "styled-components";
 
-export default function Notfound() {
-  return <ImageContainer>404!</ImageContainer>;
-}
+export default () => <ImageContainer>404!</ImageContainer>;
 
 const ImageContainer = styled.div`
   display: flex;

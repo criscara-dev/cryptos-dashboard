@@ -5,33 +5,32 @@ import styled from "styled-components";
 export default class InvestmentResult extends Component {
 
   render() {
-       const {currentPrice,currentQty,historicPrice,gain,loss,gainPercent,lossPercent} = this.props;
+    const { currentPrice, currentQty, historicPrice, gain, loss, gainPercent, lossPercent } = this.props;
 
     const checkGain = () => {
-if(gain){
-  return `You have MADE £ ${(gain).toFixed(2)}or ${gainPercent}% of your initial investment`
-} else if (loss){
-  return `You have LOST £ ${(loss.toFixed(2))} or ${lossPercent}% of your initial investment`
-} else {
-return
-}
-       }
-// console.log(` InvestmentResult component: ${currentBTC.GBP} for n. ${currentQty}`)
-// console.log(` InvestmentResult component: ${historicPrice} for n. ${currentQty}`)
+      if (gain) {
+        return `You have MADE £ ${(gain).toFixed(2)}or ${gainPercent}% of your initial investment`
+      } else if (loss) {
+        return `You have LOST £ ${(loss.toFixed(2))} or ${lossPercent}% of your initial investment`
+      } else {
+        return
+      }
+    }
+    const showValue = gain !== null || loss !== null;
+
     return (
-      <React.Fragment>
-            <PricesContainer>
-          <Table>
-            <div> <span>Q.ty </span><span>{currentQty}</span></div>
-            <div><span>Today Price:</span> <span>£ {currentPrice.GBP}</span></div>
-            <div><span>Purchase Price: </span><span> £ {historicPrice}</span></div>         
-          </Table>
-          <h4>{checkGain()}</h4>
-        </PricesContainer>
-      </React.Fragment>
+      <PricesContainer>
+        <Table>
+          <div> <span>Q.ty </span><span>{currentQty}</span></div>
+          <div><span>Today Price:</span> <span>£ {currentPrice.GBP}</span></div>
+          {showValue && <div><span>Purchase Price: </span><span> £ {historicPrice}</span></div>}
+        </Table>
+        {showValue && <h4>{checkGain()}</h4>}
+      </PricesContainer>
     );
   }
 }
+
 
 const PricesContainer = styled.div`
   display: flex;

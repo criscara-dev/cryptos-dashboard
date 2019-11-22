@@ -7,6 +7,6 @@ export const Container = styled.div`
   display: grid;
   grid-gap: 1rem;
   padding: 2rem;
-  background: ${props => props.theme.background};
+  background: ${props => props.theme.main};
   color: ${props => props.theme.color};
 `;

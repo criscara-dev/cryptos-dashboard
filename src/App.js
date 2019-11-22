@@ -15,8 +15,8 @@ import GainTracker from "./pages/GainTracker";
 
 import { createGlobalStyle } from "styled-components";
 
-import { Container } from "./components/CustomStyles";
-import Notfound from "./components/Not-found";
+import { Container } from "./components/customStyles";
+import Notfound from "./components/NotFound";
 
 const GlobalStyle = createGlobalStyle`
  ${reset}
@@ -33,29 +33,55 @@ const GlobalStyle = createGlobalStyle`
 //   color: ${props => props.theme.color};
 // `;
 
+const colors = {
+  green: "#00cc8a",
+  darkBlue: "#191734"
+};
+
 const theme = {
   light: {
-    background: "white",
-    color: "black"
-    // lightBtn: "#00cc8a"
+    main: "white",
+    secondary: "#00cc8a",
+    color: "black",
+    colors
   },
   dark: {
-    background: "#191734",
-    color: "white"
-    // darkBtn: "#00cc8a"
+    main: "#191734",
+    secondary: "#00cc8a",
+    color: "white",
+    colors
   }
 };
 
 class App extends React.Component {
-  state = {
-    isLight: true
+  state = {};
+
+  toggleTheme = () => {
+    const isLight = !this.state.isLight;
+    localStorage.setItem("isLight", !!isLight);
+    this.setState({ isLight });
+
+    //
   };
 
-  toggleTheme = () => this.setState({ isLight: !this.state.isLight });
+  componentDidMount() {
+    const isLight = localStorage.getItem("isLight");
+    if (isLight === null) {
+      localStorage.setItem("isLight", true);
+    }
+
+    this.setState({ isLight: isLight === "true" });
+  }
 
   render() {
+    console.log(this.state.isLight);
+    const selectedTheme = this.state.isLight ? theme.light : theme.dark;
+    const newTheme = {
+      isLight: this.state.isLight,
+      ...selectedTheme
+    };
     return (
-      <ThemeProvider theme={this.state.isLight ? theme.light : theme.dark}>
+      <ThemeProvider theme={newTheme}>
         <Container>
           <GlobalStyle />
           <Router>
