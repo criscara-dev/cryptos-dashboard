@@ -179,11 +179,11 @@ const DefaultSelect = styled.div`
     width: 200px;
     color: #928fff;
   }
+  h1 {
+    margin: 0 1rem;
+  }
 `;
 
 const LineChart = styled.div`
-  padding: 3rem;
-`;
-const About = styled.div`
   padding: 3rem;
 `;

@@ -105,9 +105,7 @@ export default class GainTracker extends Component {
     // console.log(this.state.historicBTC);
 
     const { selectedDay } = this.state;
-    // console.log(moment(this.state.selectedDay).unix());
-
-    console.log(this.state.cryptoAmount);
+    // console.log(this.state.cryptoAmount);
 
     return (
       <div>
@@ -116,9 +114,11 @@ export default class GainTracker extends Component {
           <Form>
             <div>
               <label htmlFor="amount">
-                {this.state.cryptoAmountError
-                  ? "You need to type a number"
-                  : "Amount"}
+                {this.state.cryptoAmountError ? (
+                  <Notvalid>* Please, type a number</Notvalid>
+                ) : (
+                  "Amount"
+                )}
               </label>
 
               <input type="text" name="amount" onBlur={this.onInputChange} />
@@ -129,7 +129,6 @@ export default class GainTracker extends Component {
                 <DayPickerInput
                   formatDate={formatDate}
                   parseDate={parseDate}
-                  // placeholder={`${formatDate(new Date())}`}
                   placeholder={`mm/dd/yyyy`}
                   value={selectedDay}
                   onDayChange={this.handleDayChange}
@@ -180,33 +179,37 @@ const Form = styled.div`
   justify-content: center;
   margin: 1rem 0;
 
-  > label,
+  label,
   button {
-    margin: 0 1rem;
+    margin: 0.5rem 1rem;
   }
-  > input {
-    border-radius: 0.5rem;
+
+  input[type="text"] {
+    border-radius: 0.2rem;
     font-size: 1rem;
-    width: 3rem;
+    width: 4rem;
     text-align: center;
+    margin: 0 1rem;
+    float: right;
   }
   div.DayPickerInput {
-    display: flex;
+    // display: flex;
   }
 
   label {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
 const Select = styled.div`
    {
     display: flex;
-
+    color: ${props => props.theme.colors.green};
     > .DayPickerInput > input:nth-child(1) {
       font-size: 1rem;
-      border-radius: 0.5rem;
-      max-width: 50%;
+      border-radius: 0.2rem;
+      max-width: 60%;
     }
   }
 `;
@@ -218,4 +221,9 @@ const ButtonCheck = styled.button`
   text-align: center;
   background-color: #fd5f60;
   color: #fff;
+`;
+
+const Notvalid = styled.div`
+  font-size: 0.8rem;
+  color: ${props => props.theme.colors.red};
 `;

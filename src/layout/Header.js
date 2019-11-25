@@ -30,16 +30,6 @@ export default withRouter(function Header(props) {
           </Li>
         </NavLeft>
         <NavRight>
-          {/* <Li login>
-            <Link className="nodeco" to="/login">
-              Login
-            </Link>
-          </Li>
-          <Li register>
-            <Link className="nodeco" to="/register">
-              Register
-            </Link>
-          </Li> */}
           <ButtonToggle onClick={props.toggleTheme}>Toggle Theme</ButtonToggle>
         </NavRight>
       </HeaderContainer>
@@ -49,6 +39,7 @@ export default withRouter(function Header(props) {
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 1rem;
 `;
 
 const NavLeft = styled.div`
@@ -78,6 +69,7 @@ const Li = styled.div`
 const ButtonToggle = styled.div`
   border-radius: 1rem;
   padding: 1rem;
-  border: 2px solid ${props => props.theme.main};
-  background: ${props => props.theme.secondary};
+  border: 2px solid ${props => props.theme.bg};
+  background: ${props => props.theme.btnBgColor};
+  color: ${props => props.theme.btnColor};
 `;

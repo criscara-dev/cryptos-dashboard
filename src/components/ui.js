@@ -6,7 +6,8 @@ export const Container = styled.div`
   min-height: 100vh;
   display: grid;
   grid-gap: 1rem;
-  padding: 2rem;
-  background: ${props => props.theme.main};
+  grid-template-rows: 100px 1fr 200px;
+  min-width: 100%;
+  background: ${props => props.theme.bg};
   color: ${props => props.theme.color};
 `;

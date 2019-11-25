@@ -9,7 +9,7 @@ export default class Toplist24h extends Component {
     // console.log(data24.length);
 
     return (
-      <React.Fragment>
+      <div>
         <CenterAlign>
           <h2>Current Market Evaluation:</h2>
           <TList24h>
@@ -56,16 +56,16 @@ export default class Toplist24h extends Component {
                     {currency.LOWDAY}
                   </span>
                   <span>
-                    <Link to={`historical-data/${data.CoinInfo.Name}`}>
+                    <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
                       Historical Data: {data.CoinInfo.Name}
-                    </Link>
+                    </StyledLink>
                   </span>
                 </CoinData>
               );
             })}
           </TList24h>
         </CenterAlign>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -77,7 +77,7 @@ const CenterAlign = styled.div`
   flex-flow: column wrap;
   > h2 {
     font-size: 2rem;
-    color: #928fff;
+    color: ${props => props.theme.colors.lightPurple};
     border-bottom: 10px solid #00faa6;
     scrollbar-color: rebeccapurple green;
     margin: 1rem 0;
@@ -90,6 +90,10 @@ const TList24h = styled.div`
   flex-direction: column;
   height: 600px;
   overflow-x: scroll;
+  background-color: ${props =>
+    props.theme.isLight
+      ? props.theme.colors.lightGray
+      : props.theme.colors.mediumDarkPurple};
 `;
 
 const CoinData = styled.div`
@@ -100,4 +104,10 @@ const CoinData = styled.div`
     padding: 0 0.2rem;
   }
   align-items: center;
+`;
+const StyledLink = styled(Link)`
+  color: ${props =>
+    props.theme.isLight
+      ? props.theme.colors.lightPurple
+      : props.theme.colors.green};
 `;

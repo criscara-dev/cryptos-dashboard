@@ -48,7 +48,8 @@ const FooterContainer = styled.div`
   flex-flow: row wrap;
   align-items: flex-start;
   padding: 1rem 0;
-  border-top: 2px soLinkd #00faa6;
+  border-top: 2px solid #00faa6;
+  margin: 1rem;
 `;
 
 const FooterColumn = styled.div`

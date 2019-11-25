@@ -30,6 +30,6 @@ const Message = styled.div`
   }
   > h3 {
     margin: 2rem 0;
-    color: #6e748e;
+    color: ${props => props.theme.colors.gray};
   }
 `;
