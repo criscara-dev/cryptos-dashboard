@@ -124,7 +124,7 @@ export default class HistoricalData extends Component {
     }
 
     return (
-      <div>
+      <AllData>
         <LineChart>
           <H1>Trend for {this.props.match.params.coin}</H1>
           <Line
@@ -153,17 +153,32 @@ export default class HistoricalData extends Component {
             }}
           />
         </LineChart>
-        {dataFull &&
-          Object.keys(dataFull).map(key => (
-            <div>
-              <span>{key}</span>
-              <span>{dataFull[key]}</span>
-            </div>
-          ))}
-      </div>
+        <SubTitle>Market Stats</SubTitle>
+        <ContainerStats>
+          {dataFull &&
+            Object.keys(dataFull).map(key => (
+              <MarketStats>
+                <span>{key}</span>
+                <span>{dataFull[key]}</span>
+              </MarketStats>
+            ))}
+        </ContainerStats>
+      </AllData>
     );
   }
 }
+
+const AllData = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+`;
+
+const LineChart = styled.div`
+  display: flex;
+  padding: 3rem;
+  width: 70vw;
+`;
 
 const H1 = styled.div`
   display: flex;
@@ -184,6 +199,32 @@ const DefaultSelect = styled.div`
   }
 `;
 
-const LineChart = styled.div`
-  padding: 3rem;
+const ContainerStats = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+`;
+
+const SubTitle = styled.div`
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+`;
+
+const MarketStats = styled.div`
+  display: flex;
+  width: 50vw;
+  margin: 0 5rem;
+  justify-content: space-between;
+  > span {
+    margin: 4px;
+  }
+  &:nth-of-type(40) {
+    display: none;
+  }
+  &:nth-of-type(even) {
+    color: ${props => props.theme.colors.green};
+  }
 `;

@@ -1,9 +1,12 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
 
 export default withRouter(function Header(props) {
+  // console.log(props);
   return (
     <div>
       <HeaderContainer>
@@ -30,7 +33,10 @@ export default withRouter(function Header(props) {
           </Li>
         </NavLeft>
         <NavRight>
-          <ButtonToggle onClick={props.toggleTheme}>Toggle Theme</ButtonToggle>
+          <ButtonToggle onClick={props.toggleTheme}>
+            toggle
+            {/* <FontAwesomeIcon icon={faMoon} size="3x" color="yellow" /> */}
+          </ButtonToggle>
         </NavRight>
       </HeaderContainer>
     </div>

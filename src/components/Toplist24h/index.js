@@ -6,7 +6,6 @@ import styled from "styled-components";
 export default class Toplist24h extends Component {
   render() {
     const data24 = this.props.toplist24;
-    // console.log(data24.length);
 
     return (
       <div>
