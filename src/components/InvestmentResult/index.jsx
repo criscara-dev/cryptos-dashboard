@@ -5,17 +5,8 @@ import styled from "styled-components";
 export default class InvestmentResult extends Component {
 
   render() {
+    
     const { currentPrice, currentQty, historicPrice, gain, loss, gainPercent, lossPercent } = this.props;
-
-    // const checkGain = () => {
-    //   if (gain) {
-    //     return `You have MADE £ ${(gain).toFixed(2)}or ${gainPercent}% of your initial investment`
-    //   } else if (loss) {
-    //     return `You have LOST £ ${(loss.toFixed(2))} or ${lossPercent}% of your initial investment`
-    //   } else {
-    //     return
-    //   }
-    // }
 
     const checkGain = () => gain ? <Gain>{`You have MADE £ ${(gain).toFixed(2)} or ${gainPercent}% of your initial investment`}</Gain>
       : <Loss>{`You have LOST £ ${(loss.toFixed(2))} or ${lossPercent}% of your initial investment`}</Loss>

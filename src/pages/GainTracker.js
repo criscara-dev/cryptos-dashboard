@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-// libraries
 import styled from "styled-components";
 import cryptoCompare from "../api/cryptoCompare";
 import moment from "moment";
@@ -61,25 +60,19 @@ export default class GainTracker extends Component {
   };
 
   onClick = () => {
-    // CP =  Current Price
-    // HP =  Storic Price
     const HP = this.state.historicBTC.GBP;
     const CP = this.state.currentBTC.GBP;
-    // newCP = CP that consider the q.ty bought
     let newCP = this.state.cryptoAmount * 100;
     newCP = (newCP * CP) / 100;
-    // newHP = HP that consider the q.ty bought
     let newHP = this.state.cryptoAmount * 100;
     newHP = (newHP * HP) / 100;
     let gainPercent, lossPercent, gain, loss;
     if (newCP > newHP) {
       gain = newCP - newHP;
       gainPercent = parseInt(((gain / newHP) * 100).toFixed(2));
-      // console.log(`The profit is ${gainPercent} that is equal to £${gain}`);
     } else {
       loss = newHP - newCP;
       lossPercent = parseInt(((loss / newHP) * 100).toFixed(2));
-      // console.log(`The loss is: ${lossPercent} that is  £${loss}`);
     }
     this.setState({
       gain,
@@ -90,8 +83,6 @@ export default class GainTracker extends Component {
   };
 
   onInputChange = e => {
-    // console.log(typeof parseInt(e.target.value));
-
     if (isNaN(parseInt(e.target.value)))
       return this.setState({ cryptoAmountError: true });
     this.setState({
@@ -101,11 +92,7 @@ export default class GainTracker extends Component {
   };
 
   render() {
-    // console.log(this.state.currentBTC);
-    // console.log(this.state.historicBTC);
-
     const { selectedDay } = this.state;
-    // console.log(this.state.cryptoAmount);
 
     return (
       <div>

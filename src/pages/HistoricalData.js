@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Select from "react-select";
 
-// Libraries:
+import Select from "react-select";
 import styled from "styled-components";
-import cryptoCompare from "../api/cryptoCompare";
 import moment from "moment";
+import cryptoCompare from "../api/cryptoCompare";
 import { coins as options } from "../api/cryptoOptions";
 
 import { Line } from "react-chartjs-2";
@@ -18,7 +17,6 @@ export default class HistoricalData extends Component {
 
   getHistoday = async () => {
     const { coin } = this.props.match.params;
-    // console.log(this.props.match);
     if (!coin) {
       return this.setState({ availableCoin: null });
     }
@@ -28,7 +26,6 @@ export default class HistoricalData extends Component {
         new Date().getTime() / 1000
       )}`;
       const response = await cryptoCompare.get(link);
-      // console.log(response.data);
       if (response.data.Response === "Error") {
         this.setState({ loading: false });
         return this.props.history.push("/not-found");
@@ -44,7 +41,6 @@ export default class HistoricalData extends Component {
 
   getSymbolsFulldata = async () => {
     const { coin } = this.props.match.params;
-    // console.log(this.props.match);
     if (!coin) {
       return this.setState({ availableCoin: null });
     }
@@ -52,13 +48,13 @@ export default class HistoricalData extends Component {
       this.setState({ loading: true, availableCoin: true });
       const link = `/pricemultifull?fsyms=${coin}&tsyms=GBP,EUR,USD`;
       const response = await cryptoCompare.get(link);
-      console.log(response.data.DISPLAY);
+      // console.log(response.data.DISPLAY);
       if (response.data.Response === "Error") {
         this.setState({ loading: false });
         return this.props.history.push("/not-found");
       }
 
-      console.log(response.data.DISPLAY[coin]["EUR"], { coin });
+      // console.log(response.data.DISPLAY[coin]["EUR"], { coin });
       this.setState({
         symbolsFulldata: response.data.DISPLAY[coin],
         loading: false
@@ -86,11 +82,8 @@ export default class HistoricalData extends Component {
 
   render() {
     const { histoday, availableCoin } = this.state;
-    // console.log(this.state);
     const dataFull =
-      this.state.symbolsFulldata && this.state.symbolsFulldata["EUR"];
-    // console.log(`typeof ${dataFull}`, dataFull);
-
+      this.state.symbolsFulldata && this.state.symbolsFulldata["GBP"];
     const labels = histoday.map(label => moment.unix(label.time).format("lll"));
 
     const quotations = histoday.map(({ open }) => open);
@@ -102,7 +95,6 @@ export default class HistoricalData extends Component {
           type: "line",
           label: "Price",
           data: quotations,
-          // borderColor: "#928fff",
           borderColor: "#2ef1a4",
           lineTension: 0
         }
@@ -122,6 +114,7 @@ export default class HistoricalData extends Component {
         </DefaultSelect>
       );
     }
+    console.log(dataFull);
 
     return (
       <AllData>
@@ -153,11 +146,13 @@ export default class HistoricalData extends Component {
             }}
           />
         </LineChart>
-        <SubTitle>Market Stats</SubTitle>
+        <SubTitle>
+          Market Stats <span>* GBP</span>
+        </SubTitle>
         <ContainerStats>
           {dataFull &&
             Object.keys(dataFull).map(key => (
-              <MarketStats>
+              <MarketStats key={dataFull.PRICE}>
                 <span>{key}</span>
                 <span>{dataFull[key]}</span>
               </MarketStats>
@@ -172,12 +167,18 @@ const AllData = styled.div`
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
+  align-items: center;
 `;
 
 const LineChart = styled.div`
   display: flex;
-  padding: 3rem;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 2rem;
   width: 70vw;
+  @media (max-width: 499px) {
+    width: 100vw;
+  }
 `;
 
 const H1 = styled.div`
@@ -211,6 +212,10 @@ const SubTitle = styled.div`
   display: flex;
   justify-content: center;
   margin: 1rem 0;
+  > span {
+    font-size: 0.8rem;
+    color: ${props => props.theme.colors.red};
+  }
 `;
 
 const MarketStats = styled.div`
@@ -226,5 +231,12 @@ const MarketStats = styled.div`
   }
   &:nth-of-type(even) {
     color: ${props => props.theme.colors.green};
+  }
+  @media (max-width: 767px) and (min-width: 500px) {
+    font-size: 0.8rem;
+    width: 60vw;
+  }
+  @media (max-width: 499px) {
+    width: 100vw;
   }
 `;

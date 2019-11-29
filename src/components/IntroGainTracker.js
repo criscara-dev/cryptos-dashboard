@@ -26,5 +26,9 @@ const Message = styled.div`
     text-transform: capitalize;
     padding: 1rem 0;
     text-align: center;
+    @media (max-width: 499px) {
+      font-size: 2rem;
+      font-weight: bold;
+    }
   }
 `;

@@ -5,14 +5,14 @@ import styled from "styled-components";
 
 export default class Toplist24h extends Component {
   render() {
-    const data24 = this.props.toplist24;
+    const { toplist24 } = this.props;
 
     return (
       <div>
         <CenterAlign>
           <h2>Current Market Evaluation:</h2>
           <TList24h>
-            {data24.map(data => {
+            {toplist24.map(data => {
               const currency = data.DISPLAY[this.props.currency];
               if (!currency) return null;
               return (
@@ -86,17 +86,23 @@ const CenterAlign = styled.div`
 const TList24h = styled.div`
   display: flex;
   justify-content: space-around;
-  flex-direction: column;
+  width: 70vw;
+  flex-flow: row wrap;
   height: 600px;
   overflow-x: scroll;
   background-color: ${props =>
     props.theme.isLight
       ? props.theme.colors.lightGray
       : props.theme.colors.mediumDarkPurple};
+  @media (max-width: 1024px) {
+    font-size: 0.8rem;
+    width: 95 vw;
+  }
 `;
 
 const CoinData = styled.div`
   display: flex;
+  flex-flow: row wrap;
   > span,
   > span h3 {
     margin: 2rem 0.3rem;

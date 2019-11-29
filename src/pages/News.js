@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-// libraries
 import moment from "moment";
 import styled from "styled-components";
 import cryptoCompare from "../api/cryptoCompare";
@@ -23,13 +22,12 @@ export default class News extends Component {
   }
 
   render() {
-    const news = this.state.news;
-    // console.log(news);
+    const { news } = this.state;
     return (
       <React.Fragment>
         <Intro>Last news:</Intro>
         <Center>
-          {news.splice(0, 10).map(data => (
+          {news.splice(0, 20).map(data => (
             <NewsContainer key={data.id}>
               <img src={`${data.source_info.img}`} alt={`coin ${data.id}`} />
               <Data>
@@ -60,15 +58,19 @@ export default class News extends Component {
 
 const Center = styled.div`
   display: grid;
+
   justify-content: center;
-  // background-color: #191734;
-  // color: #fff;
 `;
 
 const NewsContainer = styled.div`
   display: flex;
-  width: 900px;
+  width: 80vw;
   margin: 1rem auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100vw;
+  }
 `;
 
 const Data = styled.div`

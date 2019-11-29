@@ -1,25 +1,13 @@
 import React, { Component } from "react";
 
-// Libraries:
 import Select from "react-select";
 import styled from "styled-components";
 import cryptoCompare from "../api/cryptoCompare";
 
-// components
 import Welcome from "../components/Welcome";
 import Toplist24h from "../components/Toplist24h/index";
 
 import options from "../api/cryptoOptions";
-
-const SelectContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  & > .select {
-    width: 200px;
-    color: #928fff;
-  }
-  margin: 1rem 0;
-`;
 
 export default class Home extends Component {
   state = {
@@ -61,11 +49,29 @@ export default class Home extends Component {
             defaultValue={{ label: "GBP currency", value: "GBP" }}
           />
         </SelectContainer>
-        <Toplist24h
-          toplist24={this.state.data24h}
-          currency={this.state.selectValue}
-        />
+        <TL24Container>
+          <Toplist24h
+            toplist24={this.state.data24h}
+            currency={this.state.selectValue}
+          />
+        </TL24Container>
       </div>
     );
   }
 }
+
+const SelectContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  & > .select {
+    width: 200px;
+    color: #928fff;
+  }
+  margin: 1rem 0;
+`;
+
+const TL24Container = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+`;
