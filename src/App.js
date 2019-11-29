@@ -2,14 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import reset from "styled-reset";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HistoricalData from "./pages/HistoricalData";
 import Home from "./pages/Home";
 import News from "./pages/News";
 import GainTracker from "./pages/GainTracker";
-
 import { Container } from "./components/ui";
 import Notfound from "./components/NotFound";
 

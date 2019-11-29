@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-
+import { Line } from "react-chartjs-2";
 import Select from "react-select";
 import styled from "styled-components";
 import moment from "moment";
 import cryptoCompare from "../api/cryptoCompare";
 import { coins as options } from "../api/cryptoOptions";
+import withMedia from "../withMedia";
 
-import { Line } from "react-chartjs-2";
-
-export default class HistoricalData extends Component {
+class HistoricalData extends Component {
   state = {
     histoday: [],
     availableCoin: true,
@@ -84,7 +83,9 @@ export default class HistoricalData extends Component {
     const { histoday, availableCoin } = this.state;
     const dataFull =
       this.state.symbolsFulldata && this.state.symbolsFulldata["GBP"];
-    const labels = histoday.map(label => moment.unix(label.time).format("lll"));
+    const labels = histoday.map(label =>
+      moment.unix(label.time).format(this.props.matches.small ? "d" : "lll")
+    );
 
     const quotations = histoday.map(({ open }) => open);
 
@@ -114,38 +115,50 @@ export default class HistoricalData extends Component {
         </DefaultSelect>
       );
     }
-    console.log(dataFull);
 
     return (
-      <AllData>
-        <LineChart>
-          <H1>Trend for {this.props.match.params.coin}</H1>
-          <Line
-            data={data}
-            width={100}
-            height={50}
-            options={{
-              title: {
-                display: true,
-                text: "Coin Chart",
-                fontSize: 16
-              },
-              legend: {
-                display: true,
-                position: "bottom"
-              },
-              scales: {
-                xAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: false
+      <Container>
+        <H1>Trend for {this.props.match.params.coin}</H1>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 800,
+            maxHeight: 600,
+            margin: "0 auto",
+            position: "relative"
+          }}
+        >
+          {this.state.symbolsFulldata && (
+            <Line
+              data={data}
+              options={{
+                responsive: true,
+                title: {
+                  display: !this.props.matches.small,
+                  text: "Coin Chart",
+                  fontSize: 16
+                },
+                legend: {
+                  display: !this.props.matches.small,
+                  position: "bottom"
+                },
+                scales: {
+                  xAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: false,
+                        maxTicksLimit: this.props.matches.small
+                          ? 5
+                          : this.state.symbolsFulldata.length
+                      }
                     }
-                  }
-                ]
-              }
-            }}
-          />
-        </LineChart>
+                  ]
+                }
+              }}
+            />
+          )}
+        </div>
+
         <SubTitle>
           Market Stats <span>* GBP</span>
         </SubTitle>
@@ -158,27 +171,18 @@ export default class HistoricalData extends Component {
               </MarketStats>
             ))}
         </ContainerStats>
-      </AllData>
+      </Container>
     );
   }
 }
 
-const AllData = styled.div`
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-`;
+export default withMedia(HistoricalData, {
+  small: "(max-width: 599px)"
+});
 
-const LineChart = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  padding: 2rem;
-  width: 70vw;
-  @media (max-width: 499px) {
-    width: 100vw;
-  }
+const Container = styled.div`
+  padding: 0 2rem;
+  box-sizing: border-box;
 `;
 
 const H1 = styled.div`

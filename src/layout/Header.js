@@ -1,47 +1,83 @@
 import React from "react";
+import { slide as Menu } from "react-burger-menu";
 import { Link, withRouter } from "react-router-dom";
+import withMedia from "../withMedia";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
 
-export default withRouter(function Header(props) {
-  // console.log(props);
-  return (
-    <div>
+class Header extends React.Component {
+  state = {
+    isOpen: false
+  };
+
+  handleOpenMenu = () => this.setState({ isOpen: !this.state.isOpen });
+
+  render() {
+    return (
       <HeaderContainer>
-        <NavLeft>
-          <Li>
+        {this.props.matches.small ? (
+          <Menu isOpen={this.state.isOpen}>
             <Link className="nodeco" to="/">
               HOME
             </Link>
-          </Li>
-          <Li>
             <Link className="nodeco" to="/historical-data">
               HISTORICAL DATA
             </Link>
-          </Li>
-          <Li>
             <Link className="nodeco" to="/news">
               NEWS
             </Link>
-          </Li>
-          <Li>
             <Link className="nodeco" to="/gain-tracker">
               GAINTRACKER
             </Link>
-          </Li>
-        </NavLeft>
-        <NavRight>
-          <ButtonToggle onClick={props.toggleTheme}>
-            toggle
-            {/* <FontAwesomeIcon icon={faMoon} size="3x" color="yellow" /> */}
-          </ButtonToggle>
-        </NavRight>
+            <ButtonToggle onClick={this.props.toggleTheme}>TOGGLE</ButtonToggle>
+          </Menu>
+        ) : (
+          <>
+            <NavLeft>
+              <Li>
+                <Link className="nodeco" to="/">
+                  HOME
+                </Link>
+              </Li>
+              <Li>
+                <Link className="nodeco" to="/historical-data">
+                  HISTORICAL DATA
+                </Link>
+              </Li>
+              <Li>
+                <Link className="nodeco" to="/news">
+                  NEWS
+                </Link>
+              </Li>
+              <Li>
+                <Link className="nodeco" to="/gain-tracker">
+                  GAINTRACKER
+                </Link>
+              </Li>
+            </NavLeft>
+            <NavRight>
+              <ButtonToggle onClick={this.props.toggleTheme}>
+                TOGGLE
+              </ButtonToggle>
+            </NavRight>
+          </>
+        )}
+        {this.props.matches.small && (
+          <button onClick={this.handleOpenMenu}>Toggle Menu</button>
+        )}
       </HeaderContainer>
-    </div>
-  );
-});
+    );
+  }
+}
+
+export default withRouter(
+  withMedia(Header, {
+    small: "(max-width: 599px)"
+  })
+);
+
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -51,6 +87,7 @@ const HeaderContainer = styled.div`
 const NavLeft = styled.div`
   display: flex;
   justify-content: row wrap;
+  align-items: center;
 `;
 
 const NavRight = styled.div`
@@ -72,10 +109,19 @@ const Li = styled.div`
   }
 `;
 
-const ButtonToggle = styled.div`
+const ButtonToggle = styled.button`
   border-radius: 1rem;
-  padding: 1rem;
-  border: 2px solid ${props => props.theme.bg};
+  padding: 0.5rem 1rem;
   background: ${props => props.theme.btnBgColor};
   color: ${props => props.theme.btnColor};
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.2s ease-in-out;
+  border: none;
+  &:active {
+    outline: none;
+  }
+  &:hover {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  }
 `;
