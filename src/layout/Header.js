@@ -2,7 +2,8 @@ import React from "react";
 import { slide as Menu } from "react-burger-menu";
 import { Link, withRouter } from "react-router-dom";
 import withMedia from "../withMedia";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 // import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 import styled from "styled-components";
@@ -18,21 +19,13 @@ class Header extends React.Component {
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
-          <Menu isOpen={this.state.isOpen}>
-            <Link className="nodeco" to="/">
-              HOME
-            </Link>
-            <Link className="nodeco" to="/historical-data">
-              HISTORICAL DATA
-            </Link>
-            <Link className="nodeco" to="/news">
-              NEWS
-            </Link>
-            <Link className="nodeco" to="/gain-tracker">
-              GAINTRACKER
-            </Link>
+          <StyledMenu noOverlay isOpen={this.state.isOpen}>
+            <Link to="/">HOME</Link>
+            <Link to="/historical-data">HISTORICAL DATA</Link>
+            <Link to="/news">NEWS</Link>
+            <Link to="/gain-tracker">GAINTRACKER</Link>
             <ButtonToggle onClick={this.props.toggleTheme}>TOGGLE</ButtonToggle>
-          </Menu>
+          </StyledMenu>
         ) : (
           <>
             <NavLeft>
@@ -65,7 +58,9 @@ class Header extends React.Component {
           </>
         )}
         {this.props.matches.small && (
-          <button onClick={this.handleOpenMenu}>Toggle Menu</button>
+          <Button onClick={this.handleOpenMenu}>
+            <FontAwesomeIcon icon={faBars} />
+          </Button>
         )}
       </HeaderContainer>
     );
@@ -77,6 +72,24 @@ export default withRouter(
     small: "(max-width: 599px)"
   })
 );
+
+const StyledMenu = styled(Menu)`
+  .bm-menu {
+    background: #373a47;
+    padding: 0;
+    font-size: 1.15em;
+  }
+  .bm-item-list {
+    background-color: ${props => props.theme.colors.lightPurple};
+    padding: 0.8em;
+  }
+  .bm-item {
+    display: block;
+    padding: 0.5em;
+    text-decoration: none;
+    color: ${props => props.theme.colors.darkPurple};
+  }
+`;
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -124,4 +137,14 @@ const ButtonToggle = styled.button`
   &:hover {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
   }
+`;
+const Button = styled.button`
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  background: ${props => props.theme.btnBgColor};
+  color: ${props => props.theme.btnColor};
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.2s ease-in-out;
+  border: none;
 `;

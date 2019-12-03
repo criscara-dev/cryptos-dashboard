@@ -42,19 +42,19 @@ export default class Home extends Component {
       <div>
         <Welcome />
         <SelectContainer>
-          <Select
+          <StyleSelect
             className="select"
             options={options}
             onChange={this.onHandleSelect}
             defaultValue={{ label: "GBP currency", value: "GBP" }}
           />
         </SelectContainer>
-        <TL24Container>
+        <div>
           <Toplist24h
             toplist24={this.state.data24h}
             currency={this.state.selectValue}
           />
-        </TL24Container>
+        </div>
       </div>
     );
   }
@@ -63,15 +63,12 @@ export default class Home extends Component {
 const SelectContainer = styled.div`
   display: flex;
   justify-content: center;
-  & > .select {
-    width: 200px;
-    color: #928fff;
-  }
   margin: 1rem 0;
 `;
 
-const TL24Container = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+const StyleSelect = styled(Select)`
+  margin: 1rem 0;
+  color: ${props => props.theme.colors.lightPurple};
+  font-weight: bold;
+  width: 200px;
 `;

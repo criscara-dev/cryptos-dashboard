@@ -80,14 +80,15 @@ const CenterAlign = styled.div`
     border-bottom: 10px solid #00faa6;
     scrollbar-color: rebeccapurple green;
     margin: 1rem 0;
+    text-align: center;
   }
 `;
 
 const TList24h = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 70vw;
   flex-flow: row wrap;
+  justify-content: space-around;
+  width: 80vw;
   height: 600px;
   overflow-x: scroll;
   background-color: ${props =>
@@ -96,7 +97,7 @@ const TList24h = styled.div`
       : props.theme.colors.mediumDarkPurple};
   @media (max-width: 1024px) {
     font-size: 0.8rem;
-    width: 95 vw;
+    width: 100vw;
   }
 `;
 
@@ -109,6 +110,16 @@ const CoinData = styled.div`
     padding: 0 0.2rem;
   }
   align-items: center;
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-flow: column wrap;
+    border-bottom-color: ${props => props.theme.colors.green};
+    border-style: solid;
+    border-width: thick;
+    > span {
+      margin: 0.5rem 0.2rem;
+    }
+  }
 `;
 const StyledLink = styled(Link)`
   color: ${props =>

@@ -191,6 +191,7 @@ const H1 = styled.div`
 `;
 
 const DefaultSelect = styled.div`
+  height: 70vh;
   display: flex;
   justify-content: center;
   flex-flow: row wrap;

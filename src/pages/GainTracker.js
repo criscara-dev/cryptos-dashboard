@@ -95,7 +95,7 @@ export default class GainTracker extends Component {
     const { selectedDay } = this.state;
 
     return (
-      <div>
+      <Container>
         <IntroGainTracker />
         <TransactionContainer>
           <Form>
@@ -142,10 +142,14 @@ export default class GainTracker extends Component {
           gainPercent={this.state.gainPercent}
           lossPercent={this.state.lossPercent}
         />
-      </div>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  height: 70vh;
+`;
 
 const TransactionContainer = styled.div`
   display: flex;

@@ -34,7 +34,7 @@ const Message = styled.div`
     font-weight: 600;
   }
   > h3 {
-    margin: 2rem 0;
+    margin: 2rem 1rem;
     color: ${props => props.theme.colors.gray};
   }
 `;
