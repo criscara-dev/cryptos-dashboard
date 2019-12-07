@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import styled from "styled-components";
-import cryptoCompare from "../api/cryptoCompare";
+import cryptoCompare from "../../api/cryptoCompare";
 import moment from "moment";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -10,22 +9,26 @@ import MomentLocaleUtils, {
   parseDate
 } from "react-day-picker/moment";
 
-import IntroGainTracker from "../components/IntroGainTracker";
-import InvestmentResult from "../components/InvestmentResult";
+import IntroGainTracker from "../../components/IntroGainTracker";
+import InvestmentResult from "../../components/InvestmentResult";
+import {Container, TransactionContainer, Form, Select, ButtonCheck, Notvalid} from './styles'
+
+const initialState = {
+  currentBTC: "",
+  historicBTC: {},
+  selectedDay: null,
+  cryptoAmount: 1,
+  gain: null,
+  loss: null,
+  gainPercent: null,
+  lossPercent: null
+};
 
 export default class GainTracker extends Component {
-  state = {
-    currentBTC: "",
-    historicBTC: {},
-    selectedDay: null,
-    cryptoAmount: 1,
-    gain: null,
-    loss: null,
-    gainPercent: null,
-    lossPercent: null
-  };
+  state = initialState
 
   getPriceHistoricData = async () => {
+    if(!this.state.selectedDay) return;
     const link = `/pricehistorical?fsym=BTC&tsyms=GBP,USD,ETH&ts=${moment(
       this.state.selectedDay
     ).unix()}`;
@@ -43,23 +46,14 @@ export default class GainTracker extends Component {
     });
   };
 
-  componentDidMount() {
-    this.getCurrentPrice();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selectedDay !== this.state.selectedDay) {
-      this.getPriceHistoricData();
-    }
-  }
-
   handleDayChange = selectedDay => {
     this.setState({
       selectedDay: selectedDay
     });
   };
 
-  onClick = () => {
+  onClick = async () => {
+    await this.getPriceHistoricData();
     const HP = this.state.historicBTC.GBP;
     const CP = this.state.currentBTC.GBP;
     let newCP = this.state.cryptoAmount * 100;
@@ -67,6 +61,7 @@ export default class GainTracker extends Component {
     let newHP = this.state.cryptoAmount * 100;
     newHP = (newHP * HP) / 100;
     let gainPercent, lossPercent, gain, loss;
+
     if (newCP > newHP) {
       gain = newCP - newHP;
       gainPercent = parseInt(((gain / newHP) * 100).toFixed(2));
@@ -78,18 +73,38 @@ export default class GainTracker extends Component {
       gain,
       loss,
       gainPercent,
-      lossPercent
+      lossPercent,
+
     });
   };
 
   onInputChange = e => {
-    if (isNaN(parseInt(e.target.value)))
+    console.log('value is', e.target.value)
+    if (isNaN(parseInt(e.target.value)) && e.target.value !== ''){
       return this.setState({ cryptoAmountError: true });
+    }
     this.setState({
-      cryptoAmount: parseInt(e.target.value),
+      cryptoAmount: parseInt(e.target.value || 0),
       cryptoAmountError: false
     });
   };
+
+  handleReset = () => {
+    const newState = {...initialState};
+    delete newState.currentBTC;
+
+    this.setState({...newState})
+  }
+
+  componentDidMount() {
+    this.getCurrentPrice();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // if (prevState.selectedDay !== this.state.selectedDay) {
+    //   this.getPriceHistoricData();
+    // }
+  }
 
   render() {
     const { selectedDay } = this.state;
@@ -108,7 +123,7 @@ export default class GainTracker extends Component {
                 )}
               </label>
 
-              <input type="text" name="amount" onBlur={this.onInputChange} />
+              <input value={this.state.cryptoAmount} onChange={this.onInputChange} type="text" name="amount" onBlur={this.onInputChange} />
             </div>
             <div>
               <label htmlFor="date">Query Date</label>
@@ -127,91 +142,28 @@ export default class GainTracker extends Component {
               </Select>
             </div>
 
-            <ButtonCheck type="submit" onClick={this.onClick}>
+            <ButtonCheck disabled={this.state.cryptoAmountError || !this.state.cryptoAmount} type="submit" onClick={this.onClick}>
               Check Now
             </ButtonCheck>
+            <button onClick={this.handleReset}> reset</button>
           </Form>
         </TransactionContainer>
         <br />
-        <InvestmentResult
-          currentPrice={this.state.currentBTC}
-          currentQty={this.state.cryptoAmount}
-          historicPrice={this.state.historicBTC.GBP}
-          loss={this.state.loss}
-          gain={this.state.gain}
-          gainPercent={this.state.gainPercent}
-          lossPercent={this.state.lossPercent}
-        />
+        {
+          !this.state.cryptoAmountError && (
+            <InvestmentResult
+              currentPrice={this.state.currentBTC}
+              currentQty={this.state.cryptoAmount}
+              historicPrice={this.state.historicBTC.GBP}
+              loss={this.state.loss}
+              gain={this.state.gain}
+              gainPercent={this.state.gainPercent}
+              lossPercent={this.state.lossPercent}
+              />
+            )
+        }
       </Container>
     );
   }
 }
 
-const Container = styled.div`
-  height: 70vh;
-`;
-
-const TransactionContainer = styled.div`
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  > h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  > p {
-    justify-content: center;
-  }
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  margin: 1rem 0;
-
-  label,
-  button {
-    margin: 0.5rem 1rem;
-  }
-
-  input[type="text"] {
-    border-radius: 0.2rem;
-    font-size: 1rem;
-    width: 4rem;
-    text-align: center;
-    margin: 0 1rem;
-    float: right;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const Select = styled.div`
-   {
-    display: flex;
-    color: ${props => props.theme.colors.green};
-    > .DayPickerInput > input:nth-child(1) {
-      font-size: 1rem;
-      border-radius: 0.2rem;
-      max-width: 60%;
-    }
-  }
-`;
-
-const ButtonCheck = styled.button`
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  padding: 1rem;
-  text-align: center;
-  background-color: #fd5f60;
-  color: #fff;
-`;
-
-const Notvalid = styled.div`
-  font-size: 0.8rem;
-  color: ${props => props.theme.colors.red};
-`;

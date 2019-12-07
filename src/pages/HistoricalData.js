@@ -166,7 +166,7 @@ class HistoricalData extends Component {
           {dataFull &&
             Object.keys(dataFull).map(key => (
               <MarketStats key={dataFull.PRICE}>
-                <span>{key}</span>
+                <span>{key}:{" "}</span>
                 <span>{dataFull[key]}</span>
               </MarketStats>
             ))}
@@ -228,20 +228,22 @@ const MarketStats = styled.div`
   display: flex;
   width: 50vw;
   margin: 0 5rem;
-  justify-content: space-between;
   > span {
     margin: 4px;
   }
-  &:nth-of-type(40) {
-    display: none;
-  }
+ 
   &:nth-of-type(even) {
     color: ${props => props.theme.colors.green};
   }
-  @media (max-width: 799px) {
+ 
+  
+  @media (max-width: 799px){
     font-size: 1rem;
-    flex-flow: column wrap;
     align-items: center;
     width: 100vw;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-top: 0.35rem;
+    margin: 0;
   }
 `;
