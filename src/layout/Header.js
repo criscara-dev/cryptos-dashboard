@@ -16,6 +16,7 @@ class Header extends React.Component {
   handleOpenMenu = () => this.setState({ isOpen: !this.state.isOpen });
 
   render() {
+    console.log(this.props.matches);
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
@@ -75,19 +76,17 @@ export default withRouter(
 
 const StyledMenu = styled(Menu)`
   .bm-menu {
-    background: #373a47;
-    padding: 0;
+    height: auto !important;
     font-size: 1.15em;
   }
   .bm-item-list {
-    background-color: ${props => props.theme.colors.lightPurple};
+    background-color: ${props => props.theme.colors.gray};
     padding: 0.8em;
   }
   .bm-item {
-    display: block;
     padding: 0.5em;
     text-decoration: none;
-    color: ${props => props.theme.colors.darkPurple};
+    color: ${props => props.theme.colors.lightGray};
   }
 `;
 

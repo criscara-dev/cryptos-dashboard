@@ -5,6 +5,7 @@ export const Container = styled.div`
   font-size: 100%;
   display: grid;
   min-height: 100vh;
+  padding: 1rem;
   background: ${props => props.theme.bg};
   color: ${props => props.theme.color};
 `;

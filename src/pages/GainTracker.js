@@ -183,9 +183,6 @@ const Form = styled.div`
     margin: 0 1rem;
     float: right;
   }
-  div.DayPickerInput {
-    // display: flex;
-  }
 
   label {
     display: flex;

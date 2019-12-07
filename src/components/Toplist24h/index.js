@@ -88,7 +88,7 @@ const TList24h = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  width: 80vw;
+  width: 90vw;
   height: 600px;
   overflow-x: scroll;
   background-color: ${props =>

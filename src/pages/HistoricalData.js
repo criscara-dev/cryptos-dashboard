@@ -9,7 +9,7 @@ import withMedia from "../withMedia";
 
 class HistoricalData extends Component {
   state = {
-    histoday: [],
+    historicalday: [],
     availableCoin: true,
     symbolsFulldata: null
   };
@@ -30,7 +30,7 @@ class HistoricalData extends Component {
         return this.props.history.push("/not-found");
       }
       this.setState({
-        histoday: response.data.Data.Data,
+        historicalday: response.data.Data.Data,
         loading: false
       });
     } catch (error) {
@@ -80,14 +80,14 @@ class HistoricalData extends Component {
   }
 
   render() {
-    const { histoday, availableCoin } = this.state;
+    const { historicalday, availableCoin } = this.state;
     const dataFull =
       this.state.symbolsFulldata && this.state.symbolsFulldata["GBP"];
-    const labels = histoday.map(label =>
+    const labels = historicalday.map(label =>
       moment.unix(label.time).format(this.props.matches.small ? "d" : "lll")
     );
 
-    const quotations = histoday.map(({ open }) => open);
+    const quotations = historicalday.map(({ open }) => open);
 
     const data = {
       labels: labels,
@@ -181,8 +181,9 @@ export default withMedia(HistoricalData, {
 });
 
 const Container = styled.div`
-  padding: 0 2rem;
   box-sizing: border-box;
+  width: 100vw;
+  padding: 0 2rem;
 `;
 
 const H1 = styled.div`
@@ -237,11 +238,10 @@ const MarketStats = styled.div`
   &:nth-of-type(even) {
     color: ${props => props.theme.colors.green};
   }
-  @media (max-width: 767px) and (min-width: 500px) {
-    font-size: 0.8rem;
-    width: 60vw;
-  }
-  @media (max-width: 499px) {
+  @media (max-width: 799px) {
+    font-size: 1rem;
+    flex-flow: column wrap;
+    align-items: center;
     width: 100vw;
   }
 `;
