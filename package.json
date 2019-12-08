@@ -11,7 +11,6 @@
     "chart.js": "^2.9.3",
     "moment": "^2.24.0",
     "react": "^16.11.0",
-    "react-burger-menu": "^2.6.13",
     "react-chartjs-2": "^2.8.0",
     "react-day-picker": "^7.4.0",
     "react-dom": "^16.11.0",
@@ -42,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-preset-react-app": "^9.1.0"
   }
 }
