@@ -3,9 +3,9 @@ import { Line } from "react-chartjs-2";
 import Select from "react-select";
 import styled from "styled-components";
 import moment from "moment";
-import cryptoCompare from "../api/cryptoCompare";
-import { coins as options } from "../api/cryptoOptions";
-import withMedia from "../withMedia";
+import cryptoCompare from "../../api/cryptoCompare";
+import { coins as options } from "../../api/cryptoOptions";
+import withMedia from "../../withMedia";
 
 class HistoricalData extends Component {
   state = {
@@ -86,7 +86,7 @@ class HistoricalData extends Component {
     const labels = historicalday.map(label =>
       moment.unix(label.time).format(this.props.matches.small ? "d" : "lll")
     );
-
+    console.log(dataFull);
     const quotations = historicalday.map(({ open }) => open);
 
     const data = {
@@ -164,12 +164,16 @@ class HistoricalData extends Component {
         </SubTitle>
         <ContainerStats>
           {dataFull &&
-            Object.keys(dataFull).map(key => (
-              <MarketStats key={dataFull.PRICE}>
-                <span>{key}:{" "}</span>
-                <span>{dataFull[key]}</span>
-              </MarketStats>
-            ))}
+            Object.keys(dataFull)
+              .filter(key =>
+                dataFull[key] === dataFull.IMAGEURL ? "" : dataFull[key]
+              )
+              .map(key => (
+                <MarketStats key={dataFull.PRICE}>
+                  <span>{key}: </span>
+                  <span>{dataFull[key]}</span>
+                </MarketStats>
+              ))}
         </ContainerStats>
       </Container>
     );
@@ -182,8 +186,6 @@ export default withMedia(HistoricalData, {
 
 const Container = styled.div`
   box-sizing: border-box;
-  width: 100vw;
-  padding: 0 2rem;
 `;
 
 const H1 = styled.div`
@@ -231,18 +233,17 @@ const MarketStats = styled.div`
   > span {
     margin: 4px;
   }
- 
+
   &:nth-of-type(even) {
     color: ${props => props.theme.colors.green};
   }
- 
-  
-  @media (max-width: 799px){
+
+  @media (max-width: 799px) {
     font-size: 1rem;
     align-items: center;
     width: 100vw;
     justify-content: flex-start;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 0.35rem;
     margin: 0;
   }
