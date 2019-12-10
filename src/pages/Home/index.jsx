@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-
-import Select from "react-select";
-import styled from "styled-components";
-import cryptoCompare from "../api/cryptoCompare";
-
-import Welcome from "../components/Welcome";
-import Toplist24h from "../components/Toplist24h/index";
-
-import options from "../api/cryptoOptions";
+import cryptoCompare from "../../api/cryptoCompare";
+import Welcome from "../../components/Welcome";
+import Toplist24h from "../../components/Toplist24h/index";
+import options from "../../api/cryptoOptions";
+import { SelectContainer,StyleSelect} from './styles'
 
 export default class Home extends Component {
   state = {
@@ -60,15 +56,4 @@ export default class Home extends Component {
   }
 }
 
-const SelectContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0;
-`;
 
-const StyleSelect = styled(Select)`
-  margin: 1rem 0;
-  color: ${props => props.theme.colors.lightPurple};
-  font-weight: bold;
-  width: 200px;
-`;

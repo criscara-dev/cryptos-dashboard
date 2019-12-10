@@ -1,5 +1,4 @@
 import React from "react";
-// import { slide as Menu } from "react-burger-menu";
 import { Link, withRouter } from "react-router-dom";
 import withMedia from "../../withMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +19,7 @@ class Header extends React.Component {
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
-          <StyledMenu menuWidth={this.state.menuWidth}>
+          <StyledMenu menuWidth={this.state.menuWidth} onClick={this.handleCloseBtn}>
             <Link to="/" onClick={this.handleCloseBtn}>HOME</Link> 
             <Link to="/historical-data" onClick={this.handleCloseBtn}>HISTORICAL DATA</Link>
             <Link to="/news" onClick={this.handleCloseBtn}>NEWS</Link>

@@ -22,7 +22,8 @@ const colors = {
   mediumDarkPurple: "#262344",
   lightPurple: "#928fff",
   lightGray: "#eeeef1",
-  red: "#fd5f60"
+  red: "#fd5f60",
+  shinyGreen: "#00faa6"
 };
 
 const theme = {
