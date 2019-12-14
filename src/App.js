@@ -1,49 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import reset from "styled-reset";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HistoricalData from "./pages/HistoricalData";
 import Home from "./pages/Home";
 import News from "./pages/News";
 import GainTracker from "./pages/GainTracker";
-import { Container } from "./components/ui";
+import { Container, theme } from "./components/ui";
 import Notfound from "./components/NotFound";
 
 const GlobalStyle = createGlobalStyle`
  ${reset}
 `;
-
-const colors = {
-  green: "#00cc8a",
-  darkPurple: "#191734",
-  gray: "#6e748e",
-  mediumDarkPurple: "#262344",
-  lightPurple: "#928fff",
-  lightGray: "#eeeef1",
-  red: "#fd5f60",
-  shinyGreen: "#00faa6"
-};
-
-const theme = {
-  light: {
-    bg: "white",
-    secondary: "#00cc8a",
-    btnBgColor: "#191734",
-    btnColor: "white",
-    color: "black",
-    colors
-  },
-  dark: {
-    bg: "#191734",
-    secondary: "#00cc8a",
-    btnBgColor: "#00cc8a",
-    btnColor: "black",
-    color: "white",
-    colors
-  }
-};
 
 class App extends React.Component {
   state = {};
@@ -73,7 +43,7 @@ class App extends React.Component {
         <Container>
           <GlobalStyle />
           <Router>
-            <Header toggleTheme={this.toggleTheme} />
+            <Header toggleTheme={this.toggleTheme} icon={this.state.isLight} />
             <div>
               <Switch>
                 <Route exact path="/" component={Home} />

@@ -11,7 +11,14 @@ import MomentLocaleUtils, {
 
 import IntroGainTracker from "../../components/IntroGainTracker";
 import InvestmentResult from "../../components/InvestmentResult";
-import {Container, TransactionContainer, Form, Select, ButtonCheck, Notvalid} from './styles'
+import {
+  Container,
+  TransactionContainer,
+  Form,
+  Select,
+  ButtonCheck,
+  Notvalid
+} from "./styles";
 
 const initialState = {
   currentBTC: "",
@@ -25,10 +32,10 @@ const initialState = {
 };
 
 export default class GainTracker extends Component {
-  state = initialState
+  state = initialState;
 
   getPriceHistoricData = async () => {
-    if(!this.state.selectedDay) return;
+    if (!this.state.selectedDay) return;
     const link = `/pricehistorical?fsym=BTC&tsyms=GBP,USD,ETH&ts=${moment(
       this.state.selectedDay
     ).unix()}`;
@@ -73,14 +80,13 @@ export default class GainTracker extends Component {
       gain,
       loss,
       gainPercent,
-      lossPercent,
-
+      lossPercent
     });
   };
 
   onInputChange = e => {
-    console.log('value is', e.target.value)
-    if (isNaN(parseInt(e.target.value)) && e.target.value !== ''){
+    console.log("value is", e.target.value);
+    if (isNaN(parseInt(e.target.value)) && e.target.value !== "") {
       return this.setState({ cryptoAmountError: true });
     }
     this.setState({
@@ -90,25 +96,17 @@ export default class GainTracker extends Component {
   };
 
   handleReset = () => {
-    const newState = {...initialState};
+    const newState = { ...initialState };
     delete newState.currentBTC;
-
-    this.setState({...newState})
-  }
+    this.setState({ ...newState });
+  };
 
   componentDidMount() {
     this.getCurrentPrice();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevState.selectedDay !== this.state.selectedDay) {
-    //   this.getPriceHistoricData();
-    // }
-  }
-
   render() {
     const { selectedDay } = this.state;
-
     return (
       <Container>
         <IntroGainTracker />
@@ -123,7 +121,13 @@ export default class GainTracker extends Component {
                 )}
               </label>
 
-              <input value={this.state.cryptoAmount} onChange={this.onInputChange} type="text" name="amount" onBlur={this.onInputChange} />
+              <input
+                value={this.state.cryptoAmount}
+                onChange={this.onInputChange}
+                type="text"
+                name="amount"
+                onBlur={this.onInputChange}
+              />
             </div>
             <div>
               <label htmlFor="date">Query Date</label>
@@ -136,34 +140,50 @@ export default class GainTracker extends Component {
                   onDayChange={this.handleDayChange}
                   dayPickerProps={{
                     selectedDays: selectedDay,
-                    localeUtils: MomentLocaleUtils
+                    localeUtils: MomentLocaleUtils,
+                    enableOutsideDays: false,
+                    disabledDays: {
+                      before: moment()
+                        .subtract(10, "year")
+                        .toDate(),
+                      after: moment().toDate()
+                    }
                   }}
                 />
               </Select>
             </div>
 
-            <ButtonCheck disabled={this.state.cryptoAmountError || !this.state.cryptoAmount} type="submit" onClick={this.onClick}>
+            <ButtonCheck
+              check
+              disabled={
+                this.state.cryptoAmountError ||
+                !this.state.cryptoAmount ||
+                !this.state.selectedDay
+              }
+              type="submit"
+              onClick={this.onClick}
+            >
               Check Now
             </ButtonCheck>
-            <button onClick={this.handleReset}> reset</button>
+            <ButtonCheck reset onClick={this.handleReset}>
+              {" "}
+              reset
+            </ButtonCheck>
           </Form>
         </TransactionContainer>
         <br />
-        {
-          !this.state.cryptoAmountError && (
-            <InvestmentResult
-              currentPrice={this.state.currentBTC}
-              currentQty={this.state.cryptoAmount}
-              historicPrice={this.state.historicBTC.GBP}
-              loss={this.state.loss}
-              gain={this.state.gain}
-              gainPercent={this.state.gainPercent}
-              lossPercent={this.state.lossPercent}
-              />
-            )
-        }
+        {!this.state.cryptoAmountError && (
+          <InvestmentResult
+            currentPrice={this.state.currentBTC}
+            currentQty={this.state.cryptoAmount}
+            historicPrice={this.state.historicBTC.GBP}
+            loss={this.state.loss}
+            gain={this.state.gain}
+            gainPercent={this.state.gainPercent}
+            lossPercent={this.state.lossPercent}
+          />
+        )}
       </Container>
     );
   }
 }
-

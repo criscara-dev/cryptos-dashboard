@@ -26,12 +26,17 @@ export default () => (
               News
             </Link>
           </Li>
-          or check my{" "}
+          or check my
           <Li>
-            <Link to="http://cristiancaratti.co.uk" className="nodeco">
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="http://cristiancaratti.co.uk"
+              className="nodeco"
+            >
               Website
-            </Link>
-          </Li>{" "}
+            </a>
+          </Li>
           ?
         </h4>
       </Right>

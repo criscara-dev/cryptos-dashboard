@@ -1,5 +1,5 @@
 import React from "react";
-import {FooterContainer,FooterColumn,Link,H3} from './styles';
+import { FooterContainer, FooterColumn, Link, H3 } from "./styles";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -31,14 +31,21 @@ export default function Footer() {
 
       <FooterColumn>
         <H3>SOCIALS</H3>
-        <Link to="https://www.Linknkedin.com/in/cristian-caratti-00a1b7136/">
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://www.Linknkedin.com/in/cristian-caratti-00a1b7136/"
+        >
           <FontAwesomeIcon icon={faLinkedin} size="3x" color="#0077B5" />
-        </Link>
-        <Link to="https://twitter.com/criscaratti">
+        </a>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://twitter.com/criscaratti"
+        >
           <FontAwesomeIcon icon={faTwitterSquare} size="3x" color="#55acee" />
-        </Link>
+        </a>
       </FooterColumn>
     </FooterContainer>
   );
 }
-

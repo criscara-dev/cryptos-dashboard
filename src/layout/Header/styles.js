@@ -20,9 +20,9 @@ a {
    color:white;
    text-decoration:none;
    margin-bottom:1rem;
+   font-size:1.5rem;
 }
 `;
-
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -56,6 +56,7 @@ export const Li = styled.div`
 
 export const ButtonToggle = styled.button`
   border-radius: 1rem;
+  margin: 5rem 0;
   padding: 0.5rem 1rem;
   background: ${props => props.theme.btnBgColor};
   color: ${props => props.theme.btnColor};
@@ -79,4 +80,25 @@ export const Button = styled.button`
   font-size: 1.2rem;
   transition: 0.2s ease-in-out;
   border: none;
+`;
+
+export const MobileSocialConnection = styled.div`
+  a {
+    margin: 0 1rem;
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
+`;
+
+export const H3 = styled.h3`
+  margin: 5rem 0 2rem 0;
+  font-weight: bold;
+  color: ${props => props.theme.colors.shinyGreen};
+`;
+
+export const ToggleIcon = styled.div`
+  color: #ffea00;
+  padding: 0 1rem;
 `;

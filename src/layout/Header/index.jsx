@@ -2,9 +2,30 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import withMedia from "../../withMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faTimes,
+  faSun,
+  faMoon
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitterSquare,
+  faLinkedin,
+  faGithub
+} from "@fortawesome/free-brands-svg-icons";
 
-import {StyledMenu, HeaderContainer, NavLeft, NavRight, Li, ButtonToggle,  Button} from './styles';
+import {
+  StyledMenu,
+  HeaderContainer,
+  NavLeft,
+  NavRight,
+  Li,
+  ButtonToggle,
+  Button,
+  MobileSocialConnection,
+  H3,
+  ToggleIcon
+} from "./styles";
 
 class Header extends React.Component {
   state = {
@@ -15,18 +36,62 @@ class Header extends React.Component {
   handleCloseBtn = e => this.setState({ menuWidth: 0 });
 
   render() {
-    console.log(this.props.matches);
+    const { icon } = this.props;
+    const iconSelected = icon ? (
+      <FontAwesomeIcon icon={faSun} />
+    ) : (
+      <FontAwesomeIcon icon={faMoon} />
+    );
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
-          <StyledMenu menuWidth={this.state.menuWidth} onClick={this.handleCloseBtn}>
-            <Link to="/" onClick={this.handleCloseBtn}>HOME</Link> 
-            <Link to="/historical-data" onClick={this.handleCloseBtn}>HISTORICAL DATA</Link>
-            <Link to="/news" onClick={this.handleCloseBtn}>NEWS</Link>
-            <Link to="/gain-tracker" onClick={this.handleCloseBtn}>GAINTRACKER</Link>
+          <StyledMenu
+            menuWidth={this.state.menuWidth}
+            onClick={this.handleCloseBtn}
+          >
             <ButtonToggle onClick={this.handleCloseBtn}>
               <FontAwesomeIcon icon={faTimes} />
             </ButtonToggle>
+            <Link to="/" onClick={this.handleCloseBtn}>
+              HOME
+            </Link>
+            <Link to="/historical-data" onClick={this.handleCloseBtn}>
+              HISTORICAL DATA
+            </Link>
+            <Link to="/news" onClick={this.handleCloseBtn}>
+              NEWS
+            </Link>
+            <Link to="/gain-tracker" onClick={this.handleCloseBtn}>
+              GAINTRACKER
+            </Link>
+            <H3>Connect:</H3>
+            <MobileSocialConnection>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://www.Linknkedin.com/in/cristian-caratti-00a1b7136/"
+              >
+                <FontAwesomeIcon icon={faLinkedin} size="3x" color="#0077B5" />
+              </a>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://twitter.com/criscaratti"
+              >
+                <FontAwesomeIcon
+                  icon={faTwitterSquare}
+                  size="3x"
+                  color="#55acee"
+                />
+              </a>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://github.com/criscara-dev "
+              >
+                <FontAwesomeIcon icon={faGithub} size="3x" color="#4078c0" />
+              </a>
+            </MobileSocialConnection>
           </StyledMenu>
         ) : (
           <>
@@ -54,7 +119,7 @@ class Header extends React.Component {
             </NavLeft>
             <NavRight>
               <ButtonToggle onClick={this.props.toggleTheme}>
-                TOGGLE
+                <ToggleIcon>{iconSelected}</ToggleIcon>
               </ButtonToggle>
             </NavRight>
           </>
@@ -74,4 +139,3 @@ export default withRouter(
     small: "(max-width: 599px)"
   })
 );
-

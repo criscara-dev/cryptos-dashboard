@@ -1,4 +1,4 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   height: 70vh;
@@ -60,12 +60,15 @@ export const ButtonCheck = styled.button`
   font-size: 1rem;
   padding: 1rem;
   text-align: center;
-  background-color: #fd5f60;
+  background-color:${props =>
+    props.check ? "#fd5f60" : `${props.theme.colors.gray}`}
   color: #fff;
-  ${props => props.disabled && css`
-    opacity: 0.4;
-    cursor: not-allowed;
-  `}
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.4;
+      cursor: not-allowed;
+    `}
 `;
 
 export const Notvalid = styled.div`
