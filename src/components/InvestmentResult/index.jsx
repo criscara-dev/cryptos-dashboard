@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { PricesContainer, Table, Gain, Loss } from "./styles";
+import { PricesContainer, Table, Text } from "./styles";
+
+const Cell = ({name, value}) =>   (
+  <div>
+    <span>{name}</span>
+    <span>{value}</span>
+  </div>
+)
 
 export default class InvestmentResult extends Component {
   render() {
@@ -15,13 +22,13 @@ export default class InvestmentResult extends Component {
 
     const checkGain = () =>
       gain ? (
-        <Gain>{`You have MADE £ ${gain.toFixed(
+        <Text  >{`You have MADE £ ${gain.toFixed(
           2
-        )} or ${gainPercent}% of your initial investment`}</Gain>
+        )} or ${gainPercent}% of your initial investment`}</Text>
       ) : (
-        <Loss>{`You have LOST £ ${loss.toFixed(
+        <Text alert>{`You have LOST £ ${loss.toFixed(
           2
-        )} or ${lossPercent}% of your initial investment`}</Loss>
+        )} or ${lossPercent}% of your initial investment`}</Text>
       );
 
     const showValue = gain !== null || loss !== null;
@@ -29,20 +36,9 @@ export default class InvestmentResult extends Component {
     return (
       <PricesContainer>
         <Table>
-          <div>
-            {" "}
-            <span>Q.ty </span>
-            <span>{currentQty}</span>
-          </div>
-          <div>
-            <span>Today Price:</span> <span>£ {currentPrice.GBP}</span>
-          </div>
-          {showValue && (
-            <div>
-              <span>Purchase Price: </span>
-              <span> £ {historicPrice}</span>
-            </div>
-          )}
+          <Cell name='Q.ty' value={currentQty} />
+          <Cell name='Today Price:' value={`£ ${currentPrice.GBP}`} />
+          {showValue && <Cell name='Purchase Price: ' value={`£ ${historicPrice}`} />}
         </Table>
         {showValue && <h4>{checkGain()}</h4>}
       </PricesContainer>

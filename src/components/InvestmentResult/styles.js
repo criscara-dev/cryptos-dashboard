@@ -19,11 +19,7 @@ export const Table = styled.div`
   }
 `;
 
-export const Gain = styled.div`
-  color: ${props => props.theme.colors.green};
-  padding: 0 1rem;
-`;
-export const Loss = styled.div`
-  color: ${props => props.theme.colors.red};
+export const Text =  styled.div`
+  color: ${props => props.alert ? props.theme.colors.red : props.theme.colors.green};
   padding: 0 1rem;
 `;

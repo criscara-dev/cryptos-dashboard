@@ -61,7 +61,7 @@ class Header extends React.Component {
             <Link to="/news" onClick={this.handleCloseBtn}>
               NEWS
             </Link>
-            <Link to="/gain-tracker" onClick={this.handleCloseBtn}>
+            <Link to="/gain-tracker?coin=GBP&tsyms=GBP,USD,ETH" onClick={this.handleCloseBtn}>
               GAINTRACKER
             </Link>
             <H3>Connect:</H3>
@@ -112,7 +112,7 @@ class Header extends React.Component {
                 </Link>
               </Li>
               <Li>
-                <Link className="nodeco" to="/gain-tracker">
+                <Link className="nodeco" to="/gain-tracker?coin=GBP">
                   GAINTRACKER
                 </Link>
               </Li>
