@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
 import cryptoCompare from "../../api/cryptoCompare";
-import { Center, NewsContainer, Data,Spans, Title,Body,Span,Intro} from './styles'
+import { Title } from "../../components/Typography";
+import { Center, NewsContainer, Data, Spans, Body, Span } from "./styles";
 
 export default class News extends Component {
   state = {
@@ -23,14 +24,14 @@ export default class News extends Component {
   render() {
     const { news } = this.state;
     return (
-      <React.Fragment>
-        <Intro>Last news:</Intro>
+      <>
+        <Title>Last news:</Title>
         <Center>
           {news.splice(0, 20).map(data => (
             <NewsContainer key={data.id}>
               <img src={`${data.source_info.img}`} alt={`coin ${data.id}`} />
               <Data>
-                <Title>{data.title}</Title>
+                <Title small>{data.title}</Title>
                 <Body>
                   {data.body.slice(0, 200)}{" "}
                   <a
@@ -50,8 +51,7 @@ export default class News extends Component {
             </NewsContainer>
           ))}
         </Center>
-      </React.Fragment>
+      </>
     );
   }
 }
-

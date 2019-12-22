@@ -1,14 +1,15 @@
 import React from "react";
-import {Message} from './styles'
+import { Message } from "./styles";
+import { Title, H3 } from "../../components/Typography";
 
 export default () => (
   <Message>
-    <h1 className="title">
-      Track your crypto.<div>Today</div>
-    </h1>
-    <h3>
-      Crypto-Dashboard shows you the top 10 coins by their total volume across
-      all markets in the last 24 hours.
-    </h3>
+    <Title>
+      Track your crypto.<Title bold>Today</Title>
+    </Title>
+    <H3>
+      Check the top 10 coins by their total volume across all markets in the
+      last 24 hours by selecting your currency:
+    </H3>
   </Message>
 );

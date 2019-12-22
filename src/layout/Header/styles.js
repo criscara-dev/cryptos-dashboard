@@ -27,6 +27,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1rem;
+  border-bottom: 2px solid #00faa6;
 `;
 
 export const NavLeft = styled.div`
@@ -56,7 +57,7 @@ export const Li = styled.div`
 
 export const ButtonToggle = styled.button`
   border-radius: 1rem;
-  margin: 5rem 0;
+  margin: 1rem 0;
   padding: 0.5rem 1rem;
   background: ${props => props.theme.btnBgColor};
   color: ${props => props.theme.btnColor};

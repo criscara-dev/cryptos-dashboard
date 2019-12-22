@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Center = styled.div`
   display: grid;
-
   justify-content: center;
 `;
 
@@ -31,12 +30,6 @@ export const Spans = styled.div`
   flex-flow: column wrap;
 `;
 
-export const Title = styled.div`
-  padding: 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-`;
-
 export const Body = styled.div`
   padding: 1rem;
   line-height: 1.5;
@@ -57,11 +50,4 @@ export const Span = styled.div`
     color: ${props => props.theme.colors.gray};
   }
   color: ${props => (props.source ? "#24baa0" : "#000")};
-`;
-
-export const Intro = styled.div`
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 2rem auto;
 `;
