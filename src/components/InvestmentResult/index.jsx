@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { PricesContainer, Table, Text } from "./styles";
 
-const Cell = ({name, value}) =>   (
+const Cell = ({ name, value }) => (
   <div>
     <span>{name}</span>
     <span>{value}</span>
   </div>
-)
+);
 
 export default class InvestmentResult extends Component {
   render() {
@@ -22,7 +22,7 @@ export default class InvestmentResult extends Component {
 
     const checkGain = () =>
       gain ? (
-        <Text  >{`You have MADE £ ${gain.toFixed(
+        <Text>{`You have MADE £ ${gain.toFixed(
           2
         )} or ${gainPercent}% of your initial investment`}</Text>
       ) : (
@@ -36,9 +36,11 @@ export default class InvestmentResult extends Component {
     return (
       <PricesContainer>
         <Table>
-          <Cell name='Q.ty' value={currentQty} />
-          <Cell name='Today Price:' value={`£ ${currentPrice.GBP}`} />
-          {showValue && <Cell name='Purchase Price: ' value={`£ ${historicPrice}`} />}
+          <Cell name="Q.ty" value={currentQty} />
+          <Cell name="Today Price:" value={`£ ${currentPrice.GBP}`} />
+          {showValue && (
+            <Cell name="Purchase Price: " value={`£ ${historicPrice}`} />
+          )}
         </Table>
         {showValue && <h4>{checkGain()}</h4>}
       </PricesContainer>

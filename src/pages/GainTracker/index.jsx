@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import queryString from 'query-string'
+import queryString from "query-string";
 
 import cryptoCompare from "../../api/cryptoCompare";
 import moment from "moment";
@@ -38,13 +38,13 @@ export default class GainTracker extends Component {
   getPriceHistoricData = async () => {
     const parsed = queryString.parse(this.props.location.search);
     const { tsyms, date } = parsed;
-    console.log(tsyms)
+    console.log(tsyms);
     // if (!date) return;
     const link = `/pricehistorical?fsym=BTC&tsyms=USD,EUR,GBP&ts=${moment(
       date
     ).unix()}`;
 
-    console.log(link)
+    console.log(link);
     const response = await cryptoCompare.get(link);
     this.setState({
       historicBTC: response.data.BTC
@@ -57,23 +57,24 @@ export default class GainTracker extends Component {
     this.setState({
       currentBTC: response.data.BTC
     });
-    this.calculateHistoricalValues()
+    this.calculateHistoricalValues();
   };
 
-  handleDayChange = (selectedDay, ) => {
+  handleDayChange = selectedDay => {
     const parsed = queryString.parse(this.props.location.search);
-    parsed.date = moment(selectedDay).format('l');
-    console.log(this.props, parsed)
-    this.props.history.push(`${this.props.location.pathname}?${queryString.stringify(parsed)}`)
+    parsed.date = moment(selectedDay).format("l");
+    console.log(this.props, parsed);
+    this.props.history.push(
+      `${this.props.location.pathname}?${queryString.stringify(parsed)}`
+    );
     // this.setState({
     //   selectedDay: selectedDay
     // });
   };
 
   calculateHistoricalValues = async () => {
-    
     const parsed = queryString.parse(this.props.location.search);
-    const {coin = 'GBP'} = parsed;
+    const { coin = "GBP" } = parsed;
 
     console.log(coin, this.state.historicBTC);
     await this.getPriceHistoricData();
@@ -101,7 +102,6 @@ export default class GainTracker extends Component {
   };
 
   onInputChange = e => {
-
     if (isNaN(parseInt(e.target.value)) && e.target.value !== "") {
       return this.setState({ cryptoAmountError: true });
     }
@@ -115,16 +115,13 @@ export default class GainTracker extends Component {
     const newState = { ...initialState };
     delete newState.currentBTC;
     this.setState({ ...newState });
-   
   };
 
-
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     // const reset = moment(this.state.selectedDay).isSame(initialState.selectedDay)
     // if(prevState.selectedDay !== this.state.selectedDay && reset){
     //   this.calculateHistoricalValues();
     // }
-
   }
 
   componentDidMount() {
@@ -163,7 +160,7 @@ export default class GainTracker extends Component {
                   formatDate={formatDate}
                   parseDate={parseDate}
                   placeholder={`mm/dd/yyyy`}
-                  value={moment(parsed.date).format('l')}
+                  value={moment(parsed.date).format("l")}
                   onDayChange={this.handleDayChange}
                   dayPickerProps={{
                     selectedDays: selectedDay,
@@ -192,7 +189,11 @@ export default class GainTracker extends Component {
             >
               Check Now
             </ButtonCheck>
-            <ButtonCheck disabled={this.state.selectedDay === initialState.selectedDay}  reset onClick={this.handleReset}>
+            <ButtonCheck
+              disabled={this.state.selectedDay === initialState.selectedDay}
+              reset
+              onClick={this.handleReset}
+            >
               reset
             </ButtonCheck>
           </Form>

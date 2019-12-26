@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const Center = styled.div`
+export const Container = styled.div`
   display: grid;
   justify-content: center;
 `;
 
-export const NewsContainer = styled.div`
+export const NewsList = styled.div`
   display: flex;
   width: 80vw;
   margin: 1rem auto;
@@ -25,12 +25,12 @@ export const Data = styled.div`
   flex-flow: row wrap;
 `;
 
-export const Spans = styled.div`
+export const MoreInfo = styled.div`
   display: flex;
   flex-flow: column wrap;
 `;
 
-export const Body = styled.div`
+export const Text = styled.div`
   padding: 1rem;
   line-height: 1.5;
   color: #929eaa;

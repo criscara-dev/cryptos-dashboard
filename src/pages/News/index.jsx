@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 import cryptoCompare from "../../api/cryptoCompare";
 import { Title } from "../../components/Typography";
-import { Center, NewsContainer, Data, Spans, Body, Span } from "./styles";
+import { Container, NewsList, Data, MoreInfo, Text, Span } from "./styles";
 
 export default class News extends Component {
   state = {
@@ -26,13 +26,13 @@ export default class News extends Component {
     return (
       <>
         <Title>Last news:</Title>
-        <Center>
+        <Container>
           {news.splice(0, 20).map(data => (
-            <NewsContainer key={data.id}>
+            <NewsList key={data.id}>
               <img src={`${data.source_info.img}`} alt={`coin ${data.id}`} />
               <Data>
                 <Title small>{data.title}</Title>
-                <Body>
+                <Text>
                   {data.body.slice(0, 200)}{" "}
                   <a
                     href={`${data.url}`}
@@ -41,16 +41,16 @@ export default class News extends Component {
                   >
                     ...READ MORE
                   </a>
-                </Body>
-                <Spans>
+                </Text>
+                <MoreInfo>
                   <Span source>{data.source}</Span>
                   <Span>{moment.unix(data.published_on).calendar()}</Span>
                   <Span>CAT:{data.categories}</Span>
-                </Spans>
+                </MoreInfo>
               </Data>
-            </NewsContainer>
+            </NewsList>
           ))}
-        </Center>
+        </Container>
       </>
     );
   }

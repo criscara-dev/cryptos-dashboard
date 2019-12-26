@@ -54,13 +54,10 @@ class HistoricalData extends Component {
       this.setState({ loading: true, availableCoin: true });
       const link = `/pricemultifull?fsyms=${coin}&tsyms=GBP,EUR,USD`;
       const response = await cryptoCompare.get(link);
-      // console.log(response.data.DISPLAY);
       if (response.data.Response === "Error") {
         this.setState({ loading: false });
         return this.props.history.push("/not-found");
       }
-
-      // console.log(response.data.DISPLAY[coin]["EUR"], { coin });
       this.setState({
         symbolsFulldata: response.data.DISPLAY[coin],
         loading: false

@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { CenterAlign, TList24h, CoinData, StyledLink } from "./styles";
 
+const Cell = ({ name, value }) => (
+  <div style={{ padding: ".5rem" }}>
+    <span>
+      <h3>{name}:</h3>
+      {value}
+    </span>
+  </div>
+);
+
 export default class Toplist24h extends Component {
   render() {
     const { toplist24 } = this.props;
@@ -24,34 +33,13 @@ export default class Toplist24h extends Component {
                       height="auto"
                     />
                   </span>
-                  <span>
-                    <h3>Market:</h3>
-                    {currency.MARKET}
-                  </span>
-                  <span>
-                    <h3>Last Update:</h3>
-                    {currency.LASTUPDATE}
-                  </span>
-                  <span>
-                    <h3>Price:</h3>
-                    {currency.PRICE}
-                  </span>
-                  <span>
-                    <h3>Hign in 24h:</h3>
-                    {currency.HIGH24HOUR}
-                  </span>
-                  <span>
-                    <h3>Low in 24h:</h3>
-                    {currency.LOW24HOUR}
-                  </span>
-                  <span>
-                    <h3>High Day:</h3>
-                    {currency.HIGHDAY}
-                  </span>
-                  <span>
-                    <h3>Low Day:</h3>
-                    {currency.LOWDAY}
-                  </span>
+                  <Cell name="Market" value={currency.MARKET} />
+                  <Cell name="Last Update" value={currency.LASTUPDATE} />
+                  <Cell name="Price" value={currency.PRICE} />
+                  <Cell name="Hign in 24h" value={currency.HIGH24HOUR} />
+                  <Cell name="Low in 24h" value={currency.LOW24HOUR} />
+                  <Cell name="High Day" value={currency.HIGHDAY} />
+                  <Cell name="Low Day" value={currency.MARKET} />
                   <span>
                     <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
                       Historical Data: {data.CoinInfo.Name}

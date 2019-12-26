@@ -61,7 +61,10 @@ class Header extends React.Component {
             <Link to="/news" onClick={this.handleCloseBtn}>
               NEWS
             </Link>
-            <Link to="/gain-tracker?coin=GBP&tsyms=GBP,USD,ETH" onClick={this.handleCloseBtn}>
+            <Link
+              to="/gain-tracker?coin=GBP&tsyms=GBP,USD,ETH"
+              onClick={this.handleCloseBtn}
+            >
               GAINTRACKER
             </Link>
             <H3>Connect:</H3>
@@ -87,7 +90,7 @@ class Header extends React.Component {
               <a
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://github.com/criscara-dev "
+                href="https://github.com/criscara-dev"
               >
                 <FontAwesomeIcon icon={faGithub} size="3x" color="#4078c0" />
               </a>
