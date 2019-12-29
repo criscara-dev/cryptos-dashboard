@@ -1,3 +1,46 @@
+# Wep App:
+
+[![Crypto-App](/src/picture-name.jpeg)](https://github.com/criscara-dev/Weather-App)
+
+## Live app
+
+You can see the website live at: [url here](url-here)
+
+## Live Demo
+
+This is not the production App;
+In order to run the App you need to get first a Cryptocompare API keys from [https://min-api.cryptocompare.com/](https://min-api.cryptocompare.com/)
+
+## App Challanges
+
+- Toggle between day/night mode
+- Show current market evaluation of main coins on the Market and in different currencies (EUR, GBP, USD)
+- Get Cryptocurrencies most recent news from different sources from Cryptocompare API
+- Query historical data retrieving information and charts about a specific coin.
+- Fetch data from an outside API ( Cryptocompare API )
+- Calculate gain/losses at today date based on historical data of purchase
+- Implementing App with Style using Grid and Flexbox system
+- Use the search term to make a request to an outside API and fetch data
+- Integrate and use different node packages/libraries suh as moment.js, react-select, chart.js and react-chartjs-2, axios, styled components, react-router, react-media (media queries),react-day-picker and react-query-string.
+
+### Clone or download this repository
+
+```sh
+git clone git@github.com:criscara-dev/cryptos-dashboard.git
+```
+
+### Install dependencies
+
+```sh
+npm install
+```
+
+or
+
+```sh
+yarn install
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +109,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## License
+
+#### [MIT](./LICENSE)
