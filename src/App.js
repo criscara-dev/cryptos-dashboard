@@ -5,7 +5,7 @@ import reset from "styled-reset";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import HistoricalData from "./pages/HistoricalData";
-import Home from "./pages/Home";
+import Home from "./pages/Home";  
 import News from "./pages/News";
 import GainTracker from "./pages/GainTracker";
 import { Container, theme } from "./components/ui";

@@ -11,5 +11,7 @@ export const coins = [
   { value: "XRP", label: "Ripple" },
   { value: "EOS", label: "EOS" },
   { value: "BCH", label: "Bitcoin cash" },
-  { value: "ETC", label: "Ethereum cash" }
+  { value: "ETC", label: "Ethereum cash" },
+  { value: "DAS", label: "Das" },
+  { value: "BAT", label: "Basic Attention Token" }
 ];

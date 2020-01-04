@@ -38,7 +38,7 @@ export default class GainTracker extends Component {
   getPriceHistoricData = async () => {
     const parsed = queryString.parse(this.props.location.search);
     const { tsyms, date } = parsed;
-    console.log(tsyms);
+    console.log(`tsyms:`, tsyms);
     // if (!date) return;
     const link = `/pricehistorical?fsym=BTC&tsyms=USD,EUR,GBP&ts=${moment(
       date
@@ -111,19 +111,6 @@ export default class GainTracker extends Component {
     });
   };
 
-  handleReset = () => {
-    const newState = { ...initialState };
-    delete newState.currentBTC;
-    this.setState({ ...newState });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    // const reset = moment(this.state.selectedDay).isSame(initialState.selectedDay)
-    // if(prevState.selectedDay !== this.state.selectedDay && reset){
-    //   this.calculateHistoricalValues();
-    // }
-  }
-
   componentDidMount() {
     this.getCurrentPrice();
   }
@@ -188,13 +175,6 @@ export default class GainTracker extends Component {
               onClick={this.calculateHistoricalValues}
             >
               Check Now
-            </ButtonCheck>
-            <ButtonCheck
-              disabled={this.state.selectedDay === initialState.selectedDay}
-              reset
-              onClick={this.handleReset}
-            >
-              reset
             </ButtonCheck>
           </Form>
         </TransactionContainer>

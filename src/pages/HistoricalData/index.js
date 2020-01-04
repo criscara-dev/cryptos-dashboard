@@ -21,7 +21,7 @@ class HistoricalData extends Component {
     symbolsFulldata: null
   };
 
-  getHistoday = async () => {
+  getHistoricalDataDay = async () => {
     const { coin } = this.props.match.params;
     if (!coin) {
       return this.setState({ availableCoin: null });
@@ -72,13 +72,13 @@ class HistoricalData extends Component {
   };
 
   componentDidMount() {
-    this.getHistoday();
+    this.getHistoricalDataDay();
     this.getSymbolsFulldata();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.coin !== prevProps.match.params.coin) {
-      this.getHistoday();
+      this.getHistoricalDataDay();
       this.getSymbolsFulldata();
     }
   }
@@ -90,7 +90,6 @@ class HistoricalData extends Component {
     const labels = historicalday.map(label =>
       moment.unix(label.time).format(this.props.matches.small ? "d" : "lll")
     );
-    console.log(dataFull);
     const quotations = historicalday.map(({ open }) => open);
 
     const data = {

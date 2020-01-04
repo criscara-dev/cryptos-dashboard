@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { CenterAlign, TList24h, CoinData, StyledLink } from "./styles";
 
 const Cell = ({ name, value }) => (
-  <div style={{ padding: ".5rem" }}>
+  <div style={{ padding: ".8rem" }}>
     <span>
       <h3>{name}:</h3>
       {value}

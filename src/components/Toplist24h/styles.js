@@ -34,7 +34,11 @@ export const TList24h = styled.div`
 export const CoinData = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin: 1rem;
+  align-items: center;
+  margin: 0.8rem;
+  > span {
+    padding: 0.5rem;
+  }
   @media (max-width: 1024px) {
     display: flex;
     flex-flow: column wrap;
@@ -42,7 +46,7 @@ export const CoinData = styled.div`
     > span,
     h3 {
       display: flex;
-      flex-diredtion: column;
+      flex-direction: column;
       align-items: center;
       margin: 0.5rem 0.2rem;
     }

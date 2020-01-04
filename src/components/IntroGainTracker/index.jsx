@@ -1,16 +1,14 @@
 import React from "react";
 import { Message } from "./styled";
+import { Title, H3 } from "../../components/Typography";
 
 export default function IntroGainTracker() {
   return (
     <Message>
-      <h1 className="title">
-        Check how your cryptoCurrency is performing today
-      </h1>
-      <h3>
-        <span style={{ color: "#fd5f60" }}>&#x2731;</span> Now available only
-        for Bitcoin
-      </h3>
+      <Title>Check how your crypto is performing today</Title>
+      <H3>
+        <span>&#x2731;</span> Available for Bitcoin
+      </H3>
     </Message>
   );
 }

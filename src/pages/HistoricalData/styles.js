@@ -12,15 +12,15 @@ export const H1 = styled.div`
 export const DefaultSelect = styled.div`
   height: 70vh;
   display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
+  justify-content: flex-start;
+  flex-flow: column wrap;
   align-items: center;
   & > .select {
     width: 200px;
     color: #928fff;
   }
   h1 {
-    margin: 0 1rem;
+    margin: 1rem;
   }
 `;
 

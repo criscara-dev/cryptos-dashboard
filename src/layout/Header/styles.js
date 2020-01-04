@@ -27,6 +27,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid #00faa6;
 `;
 
