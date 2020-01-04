@@ -24,16 +24,23 @@ class HistoricalData extends Component {
   getHistoricalDataDay = async () => {
     const { coin } = this.props.match.params;
     if (!coin) {
-      return this.setState({ availableCoin: null });
+      return this.setState({
+        availableCoin: null
+      });
     }
     try {
-      this.setState({ loading: true, availableCoin: true });
+      this.setState({
+        loading: true,
+        availableCoin: true
+      });
       const link = `/v2/histoday?fsym=${coin}&tsym=GBP&limit=50&aggregate=1&toTs=${Math.round(
         new Date().getTime() / 1000
       )}`;
       const response = await cryptoCompare.get(link);
       if (response.data.Response === "Error") {
-        this.setState({ loading: false });
+        this.setState({
+          loading: false
+        });
         return this.props.history.push("/not-found");
       }
       this.setState({
@@ -41,21 +48,31 @@ class HistoricalData extends Component {
         loading: false
       });
     } catch (error) {
-      this.setState({ loading: false, error: true });
+      this.setState({
+        loading: false,
+        error: true
+      });
     }
   };
 
   getSymbolsFulldata = async () => {
     const { coin } = this.props.match.params;
     if (!coin) {
-      return this.setState({ availableCoin: null });
+      return this.setState({
+        availableCoin: null
+      });
     }
     try {
-      this.setState({ loading: true, availableCoin: true });
+      this.setState({
+        loading: true,
+        availableCoin: true
+      });
       const link = `/pricemultifull?fsyms=${coin}&tsyms=GBP,EUR,USD`;
       const response = await cryptoCompare.get(link);
       if (response.data.Response === "Error") {
-        this.setState({ loading: false });
+        this.setState({
+          loading: false
+        });
         return this.props.history.push("/not-found");
       }
       this.setState({
@@ -63,7 +80,10 @@ class HistoricalData extends Component {
         loading: false
       });
     } catch (error) {
-      this.setState({ loading: false, error: true });
+      this.setState({
+        loading: false,
+        error: true
+      });
     }
   };
 
@@ -108,20 +128,20 @@ class HistoricalData extends Component {
     if (!availableCoin) {
       return (
         <DefaultSelect>
-          <h1>Please select a coin:</h1>
+          <h1> Please select a coin: </h1>{" "}
           <Select
             className="select"
             options={options}
             onChange={this.onHandleSelect}
             defaultValue={options[0]}
-          />
+          />{" "}
         </DefaultSelect>
       );
     }
 
     return (
       <Container>
-        <H1>Trend for {this.props.match.params.coin}</H1>
+        <H1> Trend for {this.props.match.params.coin} </H1>{" "}
         <div
           style={{
             width: "100%",
@@ -131,6 +151,7 @@ class HistoricalData extends Component {
             position: "relative"
           }}
         >
+          {" "}
           {this.state.symbolsFulldata && (
             <Line
               data={data}
@@ -159,13 +180,13 @@ class HistoricalData extends Component {
                 }
               }}
             />
-          )}
+          )}{" "}
         </div>
-
         <SubTitle>
-          Market Stats <span>* GBP</span>
-        </SubTitle>
+          Market Stats <span> * GBP </span>{" "}
+        </SubTitle>{" "}
         <ContainerStats>
+          {" "}
           {dataFull &&
             Object.keys(dataFull)
               .filter(key =>
@@ -173,8 +194,14 @@ class HistoricalData extends Component {
               )
               .map(key => (
                 <MarketStats key={dataFull.PRICE}>
-                  <span>{key}: </span>
-                  <span>{dataFull[key]}</span>
+                  <span style={{ opacity: 0.8, marginRight: 8 }}> {key}: </span>{" "}
+                  <span
+                    style={{
+                      fontWeight: 900
+                    }}
+                  >
+                    {dataFull[key]}
+                  </span>
                 </MarketStats>
               ))}
         </ContainerStats>

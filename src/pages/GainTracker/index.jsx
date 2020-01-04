@@ -10,7 +10,7 @@ import MomentLocaleUtils, {
   parseDate
 } from "react-day-picker/moment";
 
-import IntroGainTracker from "../../components/IntroGainTracker";
+import Message from "../../components/Message";
 import InvestmentResult from "../../components/InvestmentResult";
 import {
   Container,
@@ -31,6 +31,37 @@ const initialState = {
   gainPercent: null,
   lossPercent: null
 };
+
+const Input = ({
+  name,
+  onBlur,
+  onChange,
+  value,
+  label,
+  error,
+  errorMessage,
+  children
+}) => (
+  <div>
+    {label && (
+      <label htmlFor={name}>
+        {error ? <Notvalid>{errorMessage}</Notvalid> : label}
+      </label>
+    )}
+
+    {children ? (
+      children
+    ) : (
+      <input
+        value={value}
+        onChange={onChange}
+        type="text"
+        name={name}
+        onBlur={onBlur}
+      />
+    )}
+  </div>
+);
 
 export default class GainTracker extends Component {
   state = { ...initialState };
@@ -120,28 +151,18 @@ export default class GainTracker extends Component {
     const parsed = queryString.parse(this.props.location.search);
     return (
       <Container>
-        <IntroGainTracker />
+        <Message />
         <TransactionContainer>
           <Form>
-            <div>
-              <label htmlFor="amount">
-                {this.state.cryptoAmountError ? (
-                  <Notvalid>* Please, type a number</Notvalid>
-                ) : (
-                  "Amount"
-                )}
-              </label>
-
-              <input
-                value={this.state.cryptoAmount}
-                onChange={this.onInputChange}
-                type="text"
-                name="amount"
-                onBlur={this.onInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="date">Query Date</label>
+            <Input
+              label={"Amount"}
+              error={this.state.cryptoAmountError}
+              errorMessage="* Please, type a number"
+              value={this.state.cryptoAmount}
+              onChange={this.onInputChange}
+              onBlur={this.onInputChange}
+            />
+            <Input label={"Query Date"}>
               <Select>
                 <DayPickerInput
                   formatDate={formatDate}
@@ -162,7 +183,7 @@ export default class GainTracker extends Component {
                   }}
                 />
               </Select>
-            </div>
+            </Input>
 
             <ButtonCheck
               check

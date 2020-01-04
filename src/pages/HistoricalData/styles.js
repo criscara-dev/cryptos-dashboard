@@ -46,9 +46,11 @@ export const MarketStats = styled.div`
   display: flex;
   width: 50vw;
   margin: 0 5rem;
-  > span {
-    margin: 4px;
-  }
+  margin-bottom: 11px;
+
+  // > span {
+  //   margin: 4px;
+  // }
 
   &:nth-of-type(even) {
     color: ${props => props.theme.colors.green};

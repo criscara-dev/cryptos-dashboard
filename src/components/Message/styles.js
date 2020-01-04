@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Message = styled.div`
+export const TextContainer = styled.div `
   display: flex;
   flex-flow: column wrap;
   align-items: center;
