@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import {
+  Spacer,
   StyledMenu,
   HeaderContainer,
   NavLeft,
@@ -23,17 +24,17 @@ import {
   ButtonToggle,
   Button,
   MobileSocialConnection,
-  H3,
-  ToggleIcon
+  ToggleIcon,
+  ButtonToggleRight
 } from "./styles";
 
 class Header extends React.Component {
   state = {
-    menuWidth: 0
+    openMenu: "none"
   };
 
-  handleClick = e => this.setState({ menuWidth: "100vw" });
-  handleCloseBtn = e => this.setState({ menuWidth: 0 });
+  handleClick = e => this.setState({ openMenu: !this.state.openMenu });
+  handleCloseBtn = e => this.setState({ openMenu: "none" });
 
   render() {
     const { icon } = this.props;
@@ -42,12 +43,13 @@ class Header extends React.Component {
     ) : (
       <FontAwesomeIcon icon={faMoon} />
     );
+
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
           <StyledMenu
-            menuWidth={this.state.menuWidth}
-            onClick={this.handleCloseBtn}
+            openMenu={this.state.openMenu}
+            // onClick={this.handleCloseBtn}
           >
             <ButtonToggle onClick={this.handleCloseBtn}>
               <FontAwesomeIcon icon={faTimes} />
@@ -67,14 +69,14 @@ class Header extends React.Component {
             >
               GAINTRACKER
             </Link>
-            <H3>Connect:</H3>
+            <Spacer />
             <MobileSocialConnection>
               <a
                 rel="noopener noreferrer"
                 target="_blank"
                 href="https://www.Linknkedin.com/in/cristian-caratti-00a1b7136/"
               >
-                <FontAwesomeIcon icon={faLinkedin} size="3x" color="#0077B5" />
+                <FontAwesomeIcon icon={faLinkedin} size="2x" color="#0077B5" />
               </a>
               <a
                 rel="noopener noreferrer"
@@ -83,7 +85,7 @@ class Header extends React.Component {
               >
                 <FontAwesomeIcon
                   icon={faTwitterSquare}
-                  size="3x"
+                  size="2x"
                   color="#55acee"
                 />
               </a>
@@ -92,7 +94,7 @@ class Header extends React.Component {
                 target="_blank"
                 href="https://github.com/criscara-dev"
               >
-                <FontAwesomeIcon icon={faGithub} size="3x" color="#4078c0" />
+                <FontAwesomeIcon icon={faGithub} size="2x" color="#4078c0" />
               </a>
             </MobileSocialConnection>
           </StyledMenu>
@@ -128,9 +130,14 @@ class Header extends React.Component {
           </>
         )}
         {this.props.matches.small && (
+        <>
           <Button onClick={this.handleClick}>
             <FontAwesomeIcon icon={faBars} />
           </Button>
+          <ButtonToggleRight onClick={this.props.toggleTheme}>
+          <ToggleIcon>{iconSelected}</ToggleIcon>
+        </ButtonToggleRight>
+        </>  
         )}
       </HeaderContainer>
     );

@@ -33,13 +33,13 @@ export default class Toplist24h extends Component {
                       height="auto"
                     />
                   </span>
-                  <Cell name="Market" value={currency.MARKET} />
-                  <Cell name="Last Update" value={currency.LASTUPDATE} />
-                  <Cell name="Price" value={currency.PRICE} />
-                  <Cell name="Hign in 24h" value={currency.HIGH24HOUR} />
-                  <Cell name="Low in 24h" value={currency.LOW24HOUR} />
-                  <Cell name="High Day" value={currency.HIGHDAY} />
-                  <Cell name="Low Day" value={currency.MARKET} />
+                  <Cell name="MARKET" value={currency.MARKET} />
+                  <Cell name="LAST UPDATE" value={currency.LASTUPDATE} />
+                  <Cell name="PRICE" value={currency.PRICE} />
+                  <Cell name="HIGH IN 24H" value={currency.HIGH24HOUR} />
+                  <Cell name="LOW IN 24H" value={currency.LOW24HOUR} />
+                  <Cell name="HIGH DAY" value={currency.HIGHDAY} />
+                  <Cell name="LOW DAY" value={currency.LOWDAY} />
                   <span>
                     <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
                       Historical Data: {data.CoinInfo.Name}

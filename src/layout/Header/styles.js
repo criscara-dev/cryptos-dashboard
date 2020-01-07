@@ -7,11 +7,11 @@ flex-direction:column;
 justify-content: center;
 align-items: center;
 z-index: 999;
-width: ${props => props.menuWidth}
 height: 100vh;
+width:100vw;
 top: 0;
 left: 0;
-background-color: rgba(0, 0, 0, 0.9);
+background-color: ${props => props.theme.colors.mediumDarkPurple}
 overflow-x: hidden;
 transition: 0.5s;
 color: white;
@@ -20,8 +20,10 @@ a {
    color:white;
    text-decoration:none;
    margin-bottom:1rem;
-   font-size:1.5rem;
+   font-size:1.2rem;
+   font-weight:bold;
 }
+display: ${props => props.openMenu}
 `;
 export const HeaderContainer = styled.div`
   display: flex;
@@ -57,6 +59,11 @@ export const Li = styled.div`
 `;
 
 export const ButtonToggle = styled.button`
+  @media (max-width: 599px) {
+    position: fixed;
+    top: 0;
+    left: 1rem;
+  }
   border-radius: 1rem;
   margin: 1rem 0;
   padding: 0.5rem 1rem;
@@ -73,6 +80,7 @@ export const ButtonToggle = styled.button`
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
   }
 `;
+
 export const Button = styled.button`
   border-radius: 1rem;
   padding: 0.5rem 1rem;
@@ -86,7 +94,7 @@ export const Button = styled.button`
 
 export const MobileSocialConnection = styled.div`
   a {
-    margin: 0 1rem;
+    margin: 1rem;
     cursor: pointer;
     &:hover {
       color: red;
@@ -94,13 +102,34 @@ export const MobileSocialConnection = styled.div`
   }
 `;
 
-export const H3 = styled.h3`
-  margin: 5rem 0 2rem 0;
-  font-weight: bold;
-  color: ${props => props.theme.colors.shinyGreen};
-`;
-
 export const ToggleIcon = styled.div`
   color: #ffea00;
   padding: 0 1rem;
+`;
+
+export const Spacer = styled.div`
+  height: 50vh;
+`;
+
+export const ButtonToggleRight = styled.button`
+  @media (max-width: 599px) {
+    position: fixed;
+    top: 0;
+    right: 1rem;
+  }
+  border-radius: 1rem;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  background: ${props => props.theme.btnBgColor};
+  color: ${props => props.theme.btnColor};
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.2s ease-in-out;
+  border: none;
+  &:active {
+    outline: none;
+  }
+  &:hover {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  }
 `;

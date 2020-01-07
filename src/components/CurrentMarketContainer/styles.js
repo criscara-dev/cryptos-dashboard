@@ -32,6 +32,14 @@ export const TList24h = styled.div`
 `;
 
 export const CoinData = styled.div`
+  // :not(:nth-child(1)) div > span > h3 {
+  //   display: none;
+  // }
+  // :nth-child(1) > div > span > h3 {
+  //   color: ${props => props.theme.colors.green};
+  //   padding-bottom: 0.5rem;
+  //   font-weight: bold;
+  // }
   display: flex;
   flex-flow: row wrap;
   align-items: center;
