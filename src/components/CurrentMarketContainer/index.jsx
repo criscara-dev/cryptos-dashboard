@@ -26,16 +26,13 @@ export default class Toplist24h extends Component {
           <h2>Current Market Evaluation:</h2>
           <TList24h>
             <TableTitle>
-              <span></span>
-              <span></span> 
-              <span>Market</span>
-              <span>Last Update</span>
-              <span>Price</span>
-              <span>Hign in 24h</span>
-              <span>Low in 24h</span>
-              <span>High Day</span>
-              <span>Low Day</span>
-              <span></span>
+              <div>Market</div>
+              <div>Last Update</div>
+              <div>Price</div>
+              <div>Hign in 24h</div>
+              <div>Low in 24h</div>
+              <div>High Day</div>
+              <div>Low Day</div>
             </TableTitle>
             {toplist24.map(data => {
               const currency = data.DISPLAY[this.props.currency];
@@ -58,11 +55,9 @@ export default class Toplist24h extends Component {
                   <Cell name="Low in 24h" value={currency.LOW24HOUR} />
                   <Cell name="High Day" value={currency.HIGHDAY} />
                   <Cell name="Low Day" value={currency.LOWDAY} />
-                  <span>
-                    <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
-                      Historical Data: {data.CoinInfo.Name}
-                    </StyledLink>
-                  </span>
+                  <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
+                    Historical Data: {data.CoinInfo.Name}
+                  </StyledLink>
                 </CoinData>
               );
             })}

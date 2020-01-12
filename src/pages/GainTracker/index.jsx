@@ -70,7 +70,6 @@ export default class GainTracker extends Component {
     const parsed = queryString.parse(this.props.location.search);
     const { tsyms, date } = parsed;
     console.log(`tsyms:`, tsyms);
-    // if (!date) return;
     const link = `/pricehistorical?fsym=BTC&tsyms=USD,EUR,GBP&ts=${moment(
       date
     ).unix()}`;
@@ -145,7 +144,6 @@ export default class GainTracker extends Component {
   onReset = () => {
     const path = "/gain-tracker";
     this.props.history.push(path);
-    // window.location.assign('./gain-tracker')
   };
 
   componentDidMount() {
