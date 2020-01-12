@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  box-sizing: border-box;
+  justify-content: center;
+  > div {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
 `;
 
 export const H1 = styled.div`
@@ -49,7 +54,11 @@ export const MarketStats = styled.div`
   margin-bottom: 11px;
 
   // > span {
-  //   margin: 4px;
+  //   opacity: 0.8, marginRight: 8
+  // }
+  // >span:nth-child(2) {
+  //   padding-left:.5rem;
+  //   font-weight: 900
   // }
 
   &:nth-of-type(even) {

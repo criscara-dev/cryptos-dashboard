@@ -142,15 +142,7 @@ class HistoricalData extends Component {
     return (
       <Container>
         <H1> Trend for {this.props.match.params.coin} </H1>{" "}
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 800,
-            maxHeight: 600,
-            margin: "0 auto",
-            position: "relative"
-          }}
-        >
+        <div>
           {" "}
           {this.state.symbolsFulldata && (
             <Line
