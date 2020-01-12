@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { CenterAlign, TList24h, CoinData, StyledLink } from "./styles";
+import {
+  CenterAlign,
+  TList24h,
+  CoinData,
+  StyledLink,
+  TableTitle
+} from "./styles";
 
 const Cell = ({ name, value }) => (
   <div style={{ padding: ".8rem" }}>
@@ -19,6 +25,18 @@ export default class Toplist24h extends Component {
         <CenterAlign>
           <h2>Current Market Evaluation:</h2>
           <TList24h>
+            <TableTitle>
+              <span></span>
+              <span></span> 
+              <span>Market</span>
+              <span>Last Update</span>
+              <span>Price</span>
+              <span>Hign in 24h</span>
+              <span>Low in 24h</span>
+              <span>High Day</span>
+              <span>Low Day</span>
+              <span></span>
+            </TableTitle>
             {toplist24.map(data => {
               const currency = data.DISPLAY[this.props.currency];
               if (!currency) return null;
@@ -39,7 +57,7 @@ export default class Toplist24h extends Component {
                   <Cell name="Hign in 24h" value={currency.HIGH24HOUR} />
                   <Cell name="Low in 24h" value={currency.LOW24HOUR} />
                   <Cell name="High Day" value={currency.HIGHDAY} />
-                  <Cell name="Low Day" value={currency.MARKET} />
+                  <Cell name="Low Day" value={currency.LOWDAY} />
                   <span>
                     <StyledLink to={`historical-data/${data.CoinInfo.Name}`}>
                       Historical Data: {data.CoinInfo.Name}

@@ -29,6 +29,14 @@ export const TList24h = styled.div`
     font-size: 0.8rem;
     width: 100vw;
   }
+  > div > span:nth-child(1) {
+    display: none;
+  }
+  @media (min-width: 1200px) {
+    div > span:nth-child(1) > h3:nth-child(1) {
+      opacity: 0;
+    }
+  }
 `;
 
 export const CoinData = styled.div`
@@ -57,4 +65,16 @@ export const StyledLink = styled(Link)`
     props.theme.isLight
       ? props.theme.colors.lightPurple
       : props.theme.colors.green};
+`;
+
+export const TableTitle = styled.span`
+  padding: 1rem;
+  > span {
+    padding: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
