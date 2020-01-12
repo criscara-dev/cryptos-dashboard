@@ -17,7 +17,7 @@ import {
   TransactionContainer,
   Form,
   Select,
-  ButtonCheck,
+  Button,
   Notvalid
 } from "./styles";
 
@@ -142,6 +142,12 @@ export default class GainTracker extends Component {
     });
   };
 
+  onReset = () => {
+    const path = "/gain-tracker";
+    this.props.history.push(path);
+    // window.location.assign('./gain-tracker')
+  };
+
   componentDidMount() {
     this.getCurrentPrice();
   }
@@ -185,7 +191,7 @@ export default class GainTracker extends Component {
               </Select>
             </Input>
 
-            <ButtonCheck
+            <Button
               check
               disabled={
                 this.state.cryptoAmountError ||
@@ -196,7 +202,8 @@ export default class GainTracker extends Component {
               onClick={this.calculateHistoricalValues}
             >
               Check Now
-            </ButtonCheck>
+            </Button>
+            <Button onClick={this.onReset}>reset</Button>
           </Form>
         </TransactionContainer>
         <br />

@@ -1,12 +1,10 @@
-import styled, {
-  css
-} from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled.div `
+export const Container = styled.div`
   height: 70vh;
 `;
 
-export const TransactionContainer = styled.div `
+export const TransactionContainer = styled.div`
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -19,7 +17,7 @@ export const TransactionContainer = styled.div `
   }
 `;
 
-export const Form = styled.div `
+export const Form = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -45,17 +43,16 @@ export const Form = styled.div `
   }
 `;
 
-
-export const Input = styled.input `
-  border - radius: 0.2 rem;
-  font - size: 1 rem;
+export const Input = styled.input`
+  border- radius: 0.2 rem;
+  font- size: 1 rem;
   width: 4 rem;
-  text - align: center;
+  text- align: center;
   margin: 0 1 rem;
   float: right;
 `;
 
-export const Select = styled.div `
+export const Select = styled.div`
    {
     display: flex;
     color: ${props => props.theme.colors.green};
@@ -67,7 +64,7 @@ export const Select = styled.div `
   }
 `;
 
-export const ButtonCheck = styled.button `
+export const Button = styled.button`
   border-radius: 0.5rem;
   font-size: 1rem;
   padding: 1rem;
@@ -83,7 +80,7 @@ export const ButtonCheck = styled.button `
     `}
 `;
 
-export const Notvalid = styled.div `
+export const Notvalid = styled.div`
   font-size: 0.8rem;
   color: ${props => props.theme.colors.red};
 `;
