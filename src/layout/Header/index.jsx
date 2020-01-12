@@ -30,11 +30,11 @@ import {
 
 class Header extends React.Component {
   state = {
-    openMenu: "none"
+    openMenu: false
   };
 
-  handleClick = e => this.setState({ openMenu: !this.state.openMenu });
-  handleCloseBtn = e => this.setState({ openMenu: "none" });
+  handleClick = () => this.setState({ openMenu: !this.state.openMenu });
+  handleCloseBtn = () => this.setState({ openMenu: false });
 
   render() {
     const { icon } = this.props;
@@ -130,14 +130,14 @@ class Header extends React.Component {
           </>
         )}
         {this.props.matches.small && (
-        <>
-          <Button onClick={this.handleClick}>
-            <FontAwesomeIcon icon={faBars} />
-          </Button>
-          <ButtonToggleRight onClick={this.props.toggleTheme}>
-          <ToggleIcon>{iconSelected}</ToggleIcon>
-        </ButtonToggleRight>
-        </>  
+          <>
+            <Button onClick={this.handleClick}>
+              <FontAwesomeIcon icon={faBars} />
+            </Button>
+            <ButtonToggleRight onClick={this.props.toggleTheme}>
+              <ToggleIcon>{iconSelected}</ToggleIcon>
+            </ButtonToggleRight>
+          </>
         )}
       </HeaderContainer>
     );

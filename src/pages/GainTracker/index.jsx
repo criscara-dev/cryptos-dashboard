@@ -152,6 +152,15 @@ export default class GainTracker extends Component {
     this.getCurrentPrice();
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.match.path !== this.props.match.path &&
+      this.props.match.path === "/gain-tracker"
+    ) {
+      this.getCurrentPrice();
+    }
+  }
+
   render() {
     const { selectedDay } = this.state;
     const parsed = queryString.parse(this.props.location.search);

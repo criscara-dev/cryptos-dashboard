@@ -13,7 +13,7 @@ top: 0;
 left: 0;
 background-color: ${props => props.theme.colors.mediumDarkPurple}
 overflow-x: hidden;
-transition: 0.5s;
+transition: 0.5s ease-in-out;
 color: white;
 text-decoration: none;
 a {
@@ -23,7 +23,8 @@ a {
    font-size:1.2rem;
    font-weight:bold;
 }
-display: ${props => props.openMenu}
+  transform: translateX(${props => (props.openMenu ? "0" : "-100%")});
+  opacity: ${props => (props.openMenu ? "1" : "0")};
 `;
 export const HeaderContainer = styled.div`
   display: flex;
