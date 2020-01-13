@@ -1,6 +1,6 @@
 # Wep App:
 
-[![Crypto-App](/src/picture-name.jpeg)](https://github.com/criscara-dev/Weather-App)
+[![Crypto-App](/src/assets/crypto-dashboard.png)](https://github.com/criscara-dev/cryptos-dashboard)
 
 ## Live app
 
