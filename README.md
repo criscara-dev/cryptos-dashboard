@@ -1,6 +1,6 @@
 # Wep App:
 
-[![Crypto-App](/src/assets/crypto-dashboard.png)](https://github.com/criscara-dev/cryptos-dashboard)
+[![Crypto-App](/src/assets/images/crypto-dashboard.png)](https://github.com/criscara-dev/cryptos-dashboard)
 
 ## Live app
 
