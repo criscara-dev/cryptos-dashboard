@@ -7,7 +7,7 @@ import { SelectContainer, StyleSelect } from "./styles";
 
 export default class Home extends Component {
   state = {
-    selectValue: "GBP",
+    selectValue: localStorage.getItem("selectValue"),
     data24h: []
   };
 
@@ -26,6 +26,10 @@ export default class Home extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selectValue !== this.state.selectValue) {
       this.getTopList24h();
+      const { selectValue } = this.state;
+      console.log("state:", selectValue);
+      localStorage.setItem("selectValue", selectValue);
+      console.log("selectValue:", selectValue);
     }
   }
 
@@ -42,7 +46,10 @@ export default class Home extends Component {
             className="select"
             options={options}
             onChange={this.onHandleSelect}
-            defaultValue={{ label: "GBP currency", value: "GBP" }}
+            defaultValue={{
+              label: `${localStorage.getItem("selectValue")} currency`,
+              value: localStorage.getItem("selectValue")
+            }}
           />
         </SelectContainer>
         <div>
