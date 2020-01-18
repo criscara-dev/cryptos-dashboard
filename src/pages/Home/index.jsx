@@ -7,35 +7,31 @@ import { SelectContainer, StyleSelect } from "./styles";
 
 export default class Home extends Component {
   state = {
-    selectValue: localStorage.getItem("selectValue"),
+    selectedValue: localStorage.getItem("selectValue") || options[0].value,
     data24h: []
   };
 
   getTopList24h = async () => {
-    const link = `/top/totalvolfull?limit=10&tsym=${this.state.selectValue}&api_key=${process.env.REACT_APP_API_URL}`;
+    const link = `/top/totalvolfull?limit=10&tsym=${this.state.selectedValue}&api_key=${process.env.REACT_APP_API_URL}`;
     const response = await cryptoCompare.get(link);
     this.setState({
       data24h: response.data.Data
     });
   };
 
+  onHandleSelect = data => {
+    const value = data.value;
+    localStorage.setItem("selectValue", value);
+    this.setState({ selectedValue: value });
+    this.getTopList24h();
+  };
+
   componentDidMount() {
     this.getTopList24h();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selectValue !== this.state.selectValue) {
-      this.getTopList24h();
-      const { selectValue } = this.state;
-      localStorage.setItem("selectValue", selectValue);
-    }
-  }
-
-  onHandleSelect = data => {
-    this.setState({ selectValue: data.value });
-  };
-
   render() {
+    const { data24h } = this.state;
     return (
       <div>
         <Welcome />
@@ -45,15 +41,15 @@ export default class Home extends Component {
             options={options}
             onChange={this.onHandleSelect}
             defaultValue={{
-              label: `${localStorage.getItem("selectValue")} currency`,
-              value: localStorage.getItem("selectValue")
+              label: `${this.state.selectedValue} currency`,
+              value: this.state.selectedValue
             }}
           />
         </SelectContainer>
         <div>
           <CurrentMarketContainer
-            toplist24={this.state.data24h}
-            currency={this.state.selectValue}
+            toplist24={data24h}
+            currency={this.state.selectedValue}
           />
         </div>
       </div>

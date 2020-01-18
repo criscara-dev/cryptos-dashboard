@@ -22,8 +22,8 @@ import {
 } from "./styles";
 
 const initialState = {
-  currentBTC: "",
-  historicBTC: {},
+  currentBTC: {},
+  historicBTC: 0,
   selectedDay: new Date(),
   cryptoAmount: 1,
   gain: null,
@@ -138,9 +138,11 @@ export default class GainTracker extends Component {
   onReset = () => {
     const path = "/gain-tracker";
     this.props.history.push(path);
+    console.log("here", this.state.currentBTC, initialState);
     this.setState({
-      historicBTC: this.state.currentBTC
+      historicBTC: 0
     });
+    console.log("after");
   };
 
   componentDidMount() {
