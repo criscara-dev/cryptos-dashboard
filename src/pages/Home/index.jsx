@@ -27,9 +27,7 @@ export default class Home extends Component {
     if (prevState.selectValue !== this.state.selectValue) {
       this.getTopList24h();
       const { selectValue } = this.state;
-      console.log("state:", selectValue);
       localStorage.setItem("selectValue", selectValue);
-      console.log("selectValue:", selectValue);
     }
   }
 

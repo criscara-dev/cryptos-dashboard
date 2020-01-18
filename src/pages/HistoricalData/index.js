@@ -184,8 +184,8 @@ class HistoricalData extends Component {
               .filter(key =>
                 dataFull[key] === dataFull.IMAGEURL ? "" : dataFull[key]
               )
-              .map(key => (
-                <MarketStats key={dataFull.PRICE}>
+              .map((key, index) => (
+                <MarketStats key={index}>
                   <span style={{ opacity: 0.8, marginRight: 8 }}> {key}: </span>{" "}
                   <span
                     style={{

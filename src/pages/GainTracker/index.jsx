@@ -68,13 +68,11 @@ export default class GainTracker extends Component {
 
   getPriceHistoricData = async () => {
     const parsed = queryString.parse(this.props.location.search);
-    const { tsyms, date } = parsed;
-    console.log(`tsyms:`, tsyms);
+    const { date } = parsed;
     const link = `/pricehistorical?fsym=BTC&tsyms=USD,EUR,GBP&ts=${moment(
       date
     ).unix()}`;
 
-    console.log(link);
     const response = await cryptoCompare.get(link);
     this.setState({
       historicBTC: response.data.BTC
@@ -93,20 +91,16 @@ export default class GainTracker extends Component {
   handleDayChange = selectedDay => {
     const parsed = queryString.parse(this.props.location.search);
     parsed.date = moment(selectedDay).format("l");
-    console.log(this.props, parsed);
+
     this.props.history.push(
       `${this.props.location.pathname}?${queryString.stringify(parsed)}`
     );
-    // this.setState({
-    //   selectedDay: selectedDay
-    // });
   };
 
   calculateHistoricalValues = async () => {
     const parsed = queryString.parse(this.props.location.search);
     const { coin = "GBP" } = parsed;
 
-    console.log(coin, this.state.historicBTC);
     await this.getPriceHistoricData();
     const HP = this.state.historicBTC[coin];
     const CP = this.state.currentBTC[coin];
@@ -144,6 +138,9 @@ export default class GainTracker extends Component {
   onReset = () => {
     const path = "/gain-tracker";
     this.props.history.push(path);
+    this.setState({
+      historicBTC: this.state.currentBTC
+    });
   };
 
   componentDidMount() {

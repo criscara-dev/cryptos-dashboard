@@ -44,10 +44,10 @@ export const Form = styled.div`
 `;
 
 export const Input = styled.input`
-  border- radius: 0.2 rem;
-  font- size: 1 rem;
+  border-radius: 0.2 rem;
+  font-size: 1 rem;
   width: 4 rem;
-  text- align: center;
+  text-align: center;
   margin: 0 1 rem;
   float: right;
 `;
@@ -61,6 +61,7 @@ export const Select = styled.div`
       border-radius: 0.2rem;
       max-width: 60%;
     }
+  }
   }
 `;
 
