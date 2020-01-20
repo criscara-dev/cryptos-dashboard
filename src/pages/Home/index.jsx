@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import cryptoCompare from "../../api/cryptoCompare";
 import Welcome from "../../components/Welcome";
-import CurrentMarketContainer from "../../components/CurrentMarketContainer/index";
+import CurrentMarket from "../../components/CurrentMarket/index";
 import options from "../../api/cryptoOptions";
 import { SelectContainer, StyleSelect } from "./styles";
 
@@ -47,7 +47,7 @@ export default class Home extends Component {
           />
         </SelectContainer>
         <div>
-          <CurrentMarketContainer
+          <CurrentMarket
             toplist24={data24h}
             currency={this.state.selectedValue}
           />
