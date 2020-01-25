@@ -47,10 +47,7 @@ class Header extends React.Component {
     return (
       <HeaderContainer>
         {this.props.matches.small ? (
-          <StyledMenu
-            openMenu={this.state.openMenu}
-            // onClick={this.handleCloseBtn}
-          >
+          <StyledMenu openMenu={this.state.openMenu}>
             <ButtonToggle onClick={this.handleCloseBtn}>
               <FontAwesomeIcon icon={faTimes} />
             </ButtonToggle>

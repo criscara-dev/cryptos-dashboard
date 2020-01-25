@@ -30,7 +30,7 @@ export default class Toplist24h extends Component {
               const currency = data.DISPLAY[this.props.currency];
               if (!currency) return null;
               return (
-                <TableData>
+                <TableData key={currency.IMAGEURL}>
                   <div>
                     <img
                       src={`https://www.cryptocompare.com${data.CoinInfo.ImageUrl}`}

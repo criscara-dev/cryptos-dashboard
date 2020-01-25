@@ -39,7 +39,7 @@ export const TableHeader = styled.div`
   }
   padding-bottom: 1rem;
   font-weight: bold;
-  @media (max-width: 999px) {
+  @media (max-width: 768px) {
     > div:nth-of-type(2),
     div:nth-of-type(4),
     div:nth-of-type(5),
