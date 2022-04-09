@@ -9,7 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "axios": "^0.21.1",
     "chart.js": "^2.9.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "query-string": "^6.9.0",
     "react": "^16.11.0",
     "react-chartjs-2": "^2.8.0",
